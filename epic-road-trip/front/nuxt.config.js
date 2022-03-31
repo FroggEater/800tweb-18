@@ -16,19 +16,6 @@ export default {
     ]
   },
 
-  publicRuntimeConfig: {
-    strapi: {
-      url: process.env.EPIC_ROAD_TRIP_EXTERNAL_API_URL
-    },
-    EPIC_ROAD_TRIP_EXTERNAL_API_URL: process.env.EPIC_ROAD_TRIP_EXTERNAL_API_URL
-  },
-
-  privateRuntimeConfig: {
-    strapi: {
-      url: process.env.EPIC_ROAD_TRIP_INTERNAL_API_URL
-    },
-  },
-
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
   ],
@@ -38,6 +25,7 @@ export default {
       '~/styles/app.scss'
     ]
   },
+
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -58,6 +46,25 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+
+  // build: {
+  //   extend (config) {
+  //     config.resolve.alias.vue = 'vue/dist/vue.common'
+  //   }
+  // },
+
+  publicRuntimeConfig: {
+    strapi: {
+      url: process.env.EPIC_ROAD_TRIP_EXTERNAL_API_URL
+    },
+    EPIC_ROAD_TRIP_EXTERNAL_API_URL: process.env.EPIC_ROAD_TRIP_EXTERNAL_API_URL
+  },
+
+  privateRuntimeConfig: {
+    strapi: {
+      url: process.env.EPIC_ROAD_TRIP_INTERNAL_API_URL
+    },
   },
 
   axios: {

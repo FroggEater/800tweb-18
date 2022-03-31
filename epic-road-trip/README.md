@@ -4,6 +4,23 @@
 - Build Container on Docker: `docker-compose -f docker-compose.base.yml -f docker-compose.development.yml build --no-cache front back`
 - Launch Container / Project `docker-compose -f docker-compose.base.yml -f docker-compose.development.yml up -d front back`
 
+# More Tools
+- To access to manage data in the DB without strapi:
+   build container PHP My Admin: `docker-compose -f docker-compose.base.yml -f docker-compose.development.yml up -d phpmyadmin`
 
--To access to the DB : docker-compose -f docker-compose.base.yml -f docker-compose.development.yml up -d phpmyadmin
-and go to port 34003
+# Access
+- Front(nuxt): http://localhost:34001
+
+- Back(strapi): http://localhost:34002/admin
+  (you can create your super admin account in the first visit)
+
+- BDD(mariadb): http://localhost:34003
+  (login & mdp in environment file)
+
+
+# Installing new package
+
+You will have to open a terminal on the corresponding container.
+For example, the front container : `docker-compose -f docker-compose.base.yml -f docker-compose.development.yml exec front /bin/sh`
+
+Then you can: `yarn install PACKAGE_NAME`

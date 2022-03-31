@@ -3,19 +3,6 @@ FROM node:14.7.0-alpine3.12 AS production
 ARG NODE_ENV
 ENV NODE_ENV $NODE_ENV
 
-#RUN apk add --update \
-#    python2 \
-#    make \
-#    g++ \
-#    git \
-#    autoconf \
-#    automake \
-#    libtool \
-#    file \
-#    pkgconfig \
-#    nasm \
-#    zlib-dev
-
 RUN mkdir -p /usr/src/back
 WORKDIR /usr/src/back
 COPY ./ /usr/src/back
