@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  front:
+    container_name: 800TWEB_FRONT_DEV
+    build:
+      target: development
+      args:
+        EPIC_ROAD_TRIP_INTERNAL_API_URL: ${EPIC_ROAD_TRIP_INTERNAL_API_URL}
+    environment:
+      EPIC_ROAD_TRIP_INTERNAL_API_URL: ${EPIC_ROAD_TRIP_INTERNAL_API_URL}
+    volumes:
+      - /usr/src/front/node_modules
+      - ./front:/usr/src/front
+
+  back:
+    container_name: 800TWEB_BACK_DEV
+    build:
+      target: development
+    volumes:
+      - /usr/src/back/node_modules
+      - ./back:/usr/src/back
+
+  phpmyadmin:
+    container_name: 800TWEB_PMA_DEV
+    restart: unless-stopped
+    image: phpmyadmin/phpmyadmin:5.1
+    links:
+      - sql:db
+    ports:
+      - 34003:80
+    depends_on:
+      - sql
