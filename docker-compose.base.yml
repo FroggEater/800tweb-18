@@ -1,0 +1,50 @@
+version: '3.7'
+
+services:
+  front:
+    container_name: 800TWEB_FRONT
+    restart: unless-stopped
+    build:
+      context: ./front
+      target: production
+      args:
+        NODE_ENV: ${ENVIRONMENT}
+        EPIC_ROAD_TRIP_EXTERNAL_API_URL: ${EPIC_ROAD_TRIP_EXTERNAL_API_URL}
+    environment:
+      NODE_ENV: ${ENVIRONMENT}
+      EPIC_ROAD_TRIP_EXTERNAL_API_URL: ${EPIC_ROAD_TRIP_EXTERNAL_API_URL}
+    ports:
+      - 34001:3000
+
+  back:
+    container_name: 800TWEB_BACK
+    restart: unless-stopped
+    build:
+      context: ./back
+      target: production
+      args:
+        NODE_ENV: ${ENVIRONMENT}
+    environment:
+      NODE_ENV: ${ENVIRONMENT}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+      DATABASE_HOST: ${SQL_HOST}
+      DATABASE_PORT: ${SQL_PORT}
+      DATABASE_NAME: ${SQL_DATABASE}
+      DATABASE_USERNAME: ${SQL_USER}
+      DATABASE_PASSWORD: ${SQL_PASSWORD}
+#      AWS_SES_KEY: ${AWS_SES_KEY}
+#      AWS_SES_SECRET: ${AWS_SES_SECRET}
+    ports:
+      - 34002:1337
+    depends_on:
+      - sql
+
+  sql:
+    container_name: 800TWEB_DB
+    restart: unless-stopped
+    image: mariadb:10.2.38-bionic
+    environment:
+      MYSQL_ROOT_PASSWORD: ${SQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${SQL_DATABASE}
+      MYSQL_USER: ${SQL_USER}
+      MYSQL_PASSWORD: ${SQL_PASSWORD}
