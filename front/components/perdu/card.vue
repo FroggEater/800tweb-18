@@ -1,7 +1,7 @@
 <template>
   <div class="perdu d-flex flex-column align-items-center p-5">
     <span class="exemple__text" @click="$router.push('/')">
-      Vas y clic Mameeene
+      Vas y clic Mameeene {{ yolo }}
     </span>
   </div>
 </template>
@@ -11,7 +11,7 @@ import Vue from "vue";
 
 export default Vue.extend({
   props: {
-    yolo: {}
+    yolo: String
   }
 })
 </script>

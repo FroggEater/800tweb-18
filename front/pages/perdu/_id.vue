@@ -7,5 +7,11 @@
 <script>
 import Vue from "vue";
 
-export default Vue.extend({})
+export default Vue.extend({
+  data() {
+    return {
+      yolo: "YOLO"
+    }
+  }
+})
 </script>
