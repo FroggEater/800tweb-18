@@ -5,7 +5,7 @@
 - Launch Container / Project `docker-compose -f docker-compose.base.yml -f docker-compose.development.yml up -d front back`
 
 # More Tools
-- To access to manage data in the DB without strapi:
+- To access and manage data in DB without strapi:
    build container PHP My Admin: `docker-compose -f docker-compose.base.yml -f docker-compose.development.yml up -d phpmyadmin`
 
 # Access
