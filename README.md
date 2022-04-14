@@ -1,4 +1,4 @@
-# Epic Road Trip - v0.0.0
+# Epic Road Trip - v0.1.4
 
 ## Development setup
 - Copy `.env.dist` to `.env` (the env file is already populated with basic values, no need to config anything)
