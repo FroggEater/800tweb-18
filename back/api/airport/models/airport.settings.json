@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "airports",
+  "info": {
+    "name": "Airport"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "trigram": {
+      "type": "string"
+    },
+    "longitude": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "string"
+    },
+    "city": {
+      "model": "city",
+      "via": "airports"
+    },
+    "flights": {
+      "via": "arrival_airport",
+      "collection": "flight"
+    }
+  }
+}

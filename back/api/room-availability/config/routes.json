@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/room-availabilities",
+      "handler": "room-availability.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/room-availabilities/count",
+      "handler": "room-availability.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/room-availabilities/:id",
+      "handler": "room-availability.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/room-availabilities",
+      "handler": "room-availability.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/room-availabilities/:id",
+      "handler": "room-availability.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/room-availabilities/:id",
+      "handler": "room-availability.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

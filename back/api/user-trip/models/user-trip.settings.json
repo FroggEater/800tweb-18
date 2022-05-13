@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_trips",
+  "info": {
+    "name": "User_Trip"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "users_permissions_users": {
+      "plugin": "users-permissions",
+      "collection": "user",
+      "via": "user_trips",
+      "dominant": true
+    },
+    "hotel_rooms": {
+      "collection": "room-availability",
+      "via": "user_trip"
+    },
+    "flights": {
+      "collection": "flight",
+      "via": "user_trip"
+    }
+  }
+}

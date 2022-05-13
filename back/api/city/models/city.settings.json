@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cities",
+  "info": {
+    "name": "City",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "trigram": {
+      "type": "string"
+    },
+    "longitude": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "string"
+    },
+    "country": {
+      "via": "cities",
+      "model": "country"
+    },
+    "hotels": {
+      "via": "city",
+      "collection": "hotel"
+    },
+    "airports": {
+      "via": "city",
+      "collection": "airport"
+    }
+  }
+}

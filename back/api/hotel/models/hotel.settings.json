@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "hotels",
+  "info": {
+    "name": "Hotel",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "trigram": {
+      "type": "string"
+    },
+    "rate": {
+      "type": "integer"
+    },
+    "longitude": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "string"
+    },
+    "city": {
+      "via": "hotels",
+      "model": "city"
+    },
+    "rooms": {
+      "via": "hotel",
+      "collection": "room"
+    }
+  }
+}

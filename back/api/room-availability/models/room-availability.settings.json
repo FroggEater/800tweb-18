@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "room_availabilities",
+  "info": {
+    "name": "Room_Availability",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "price": {
+      "type": "float"
+    },
+    "entrance_date": {
+      "type": "datetime"
+    },
+    "leaving_date": {
+      "type": "datetime"
+    },
+    "room": {
+      "model": "room",
+      "via": "room_availabilities"
+    },
+    "user_trip": {
+      "via": "hotel_rooms",
+      "model": "user-trip"
+    }
+  }
+}
