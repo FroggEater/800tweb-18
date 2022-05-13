@@ -1,14 +1,11 @@
 $color-light-lighter: #FFFEFD;
 $color-light: #F6F5F4;
 $color-light-darker: #F1EFEC;
+$color-light-sub: #BBBAB9;
 
 $color-dark-lighter: #4A586D;
 $color-dark: #354156;
-
-$color-text-dark: #354156;
-$color-text-dark-sub: #6D7889;
-$color-text-light: #F6F5F4;
-$color-text-light-sub: #BBBAB9;
+$color-dark-sub: #6D7889;
 
 $color-positive-lighter: #12D7D7;
 $color-positive: #08A4BD;
@@ -25,14 +22,11 @@ $color-black: #000;
   lightLighter: $color-light-lighter;
   light: $color-light;
   lightDarker: $color-light-darker;
+  lightSub: $color-light-sub;
 
   darkLighter: $color-dark-lighter;
   dark: $color-dark;
-
-  textDark: $color-text-dark;
-  textDarkSub: $color-text-dark-sub;
-  textLight: $color-text-light;
-  textLightSub: $color-text-light-sub;
+  darkSub: $color-dark-sub;
 
   positiveLighter: $color-positive-lighter;
   positive: $color-positive;
