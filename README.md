@@ -25,4 +25,4 @@
 You will have to open a terminal on the corresponding container.
 For example, the front container : `docker-compose -f docker-compose.base.yml -f docker-compose.development.yml exec front /bin/sh`
 
-Then you can: `yarn install PACKAGE_NAME`
+Then you can: `yarn add PACKAGE_NAME`

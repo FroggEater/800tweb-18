@@ -18,11 +18,13 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '~/assets/scss/_colors.scss',
+    '~/assets/scss/helpers.scss'
   ],
 
   styleResources: {
     scss: [
-      '~/styles/app.scss'
+      '~/assets/scss/_colors.scss'
     ]
   },
 
@@ -42,6 +44,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
+    '@nuxtjs/style-resources'
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
