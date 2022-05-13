@@ -5,37 +5,44 @@
       <span class="exemple__text" @click="$router.push(`/perdu/${item.id}`)">
         {{ item.text }}
       </span>
+      <SharedButton class="ml-2" accent="negative" :action="() => tempAction()"
+        >BUTTON</SharedButton
+      >
     </div>
   </div>
 </template>
 
 <script>
 import Vue from "vue";
-import {mapState} from "vuex";
+import { mapState } from "vuex";
 
 export default Vue.extend({
   props: {
-    yolo: {}
+    yolo: {},
   },
   computed: {
-    ...mapState(["colors"])
-  }
-})
+    ...mapState(["colors"]),
+  },
+  methods: {
+    tempAction: function () {
+      console.log("button - action");
+    },
+  },
+});
 </script>
 
 <style lang="scss" scoped>
 .exemple {
   width: 20rem;
-  background: $color-dark;
+  background: $color-light;
   border-radius: 0.8rem;
 
   &__text {
-    color: $color-text-light;
+    color: $color-dark;
 
     &:hover {
       cursor: pointer;
     }
   }
-
 }
 </style>

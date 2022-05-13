@@ -24,7 +24,7 @@ export default Vue.extend({
           text: 'c\'est cool',
         },
         3: {
-          id: 2,
+          id: 3,
           text: 'voila voila'
         }
       }
