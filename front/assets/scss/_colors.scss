@@ -1,0 +1,47 @@
+$color-light-lighter: #FFFEFD;
+$color-light: #F6F5F4;
+$color-light-darker: #F1EFEC;
+
+$color-dark-lighter: #4A586D;
+$color-dark: #354156;
+
+$color-text-dark: #354156;
+$color-text-dark-sub: #6D7889;
+$color-text-light: #F6F5F4;
+$color-text-light-sub: #BBBAB9;
+
+$color-positive-lighter: #12D7D7;
+$color-positive: #08A4BD;
+$color-positive-darker: #3287AB;
+
+$color-negative-lighter: #F1A772;
+$color-negative: #EF8354;
+$color-negative-darker: #DB6843;
+
+$color-white: #FFF;
+$color-black: #000;
+
+:export {
+  lightLighter: $color-light-lighter;
+  light: $color-light;
+  lightDarker: $color-light-darker;
+
+  darkLighter: $color-dark-lighter;
+  dark: $color-dark;
+
+  textDark: $color-text-dark;
+  textDarkSub: $color-text-dark-sub;
+  textLight: $color-text-light;
+  textLightSub: $color-text-light-sub;
+
+  positiveLighter: $color-positive-lighter;
+  positive: $color-positive;
+  positiveDarker: $color-positive-darker;
+
+  negativeLighter: $color-negative-lighter;
+  negative: $color-negative;
+  negativeDarker: $color-negative-darker;
+
+  white: $color-white;
+  black: $color-black;
+}

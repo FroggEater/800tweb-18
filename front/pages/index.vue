@@ -1,11 +1,14 @@
 <template>
   <div class="d-flex flex-row justify-content-center pt-4">
-    <HomeExemple :yolo="yolo"/>
+    <HomeExample :yolo="yolo"/>
   </div>
 </template>
 
 <script>
 import Vue from "vue";
+import VueFeather from "vue-feather";
+
+Vue.component("feather", VueFeather);
 
 export default Vue.extend({
   name: 'IndexPage',
