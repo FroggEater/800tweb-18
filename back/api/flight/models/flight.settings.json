@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "flights",
+  "info": {
+    "name": "Flight"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "flight_id": {
+      "type": "integer"
+    },
+    "remaining_places": {
+      "type": "integer"
+    },
+    "price": {
+      "type": "float"
+    },
+    "category": {
+      "type": "integer"
+    },
+    "duration": {
+      "type": "time"
+    },
+    "departure_datetime": {
+      "type": "datetime"
+    },
+    "departure_airport": {
+      "model": "airport",
+      "via": "flights"
+    },
+    "arrival_datetime": {
+      "type": "datetime"
+    },
+    "arrival_airport": {
+      "model": "airport",
+      "via": "flights"
+    },
+    "user_trip": {
+      "via": "flights",
+      "model": "user-trip"
+    }
+  }
+}

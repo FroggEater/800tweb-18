@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "rooms",
+  "info": {
+    "name": "Room",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "places": {
+      "type": "integer"
+    },
+    "hotel": {
+      "via": "rooms",
+      "model": "hotel"
+    },
+    "room_availabilities": {
+      "via": "room",
+      "collection": "room-availability"
+    }
+  }
+}
