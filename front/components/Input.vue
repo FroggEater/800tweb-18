@@ -1,6 +1,6 @@
 <template>
   <div class="perdu d-flex flex-column align-items-center p-5">
-      <input type="text" :placeholder="placeholder" :style="`font-size: ${fontsize}`" />
+      <input type="text" :placeholder="`${placeholder}`" :class="{'small': small }" />
   </div>
 </template>
 
@@ -11,7 +11,7 @@ export default{
     name:"Input", 
     props:{
         placeholder:String, 
-        fontsize: String
+        small: Boolean
     }
 }
 </script>
@@ -23,6 +23,7 @@ input {
   border-radius: 50px;
   padding-left: 2vh;
   color:#BBBAB9;
+  size: 4rem;
 
     &:hover {
       border-color: #354156;
@@ -33,5 +34,10 @@ input {
         background-color: white;
         color:#354156; 
     }
+
+    &.small{
+      size: 3rem;
+    }
+
   }
 </style>
