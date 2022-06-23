@@ -1,5 +1,8 @@
 {
   "name": "epic-road-trip",
+  "jest": {
+    "verbose": true
+  },
   "version": "1.0.0",
   "private": true,
   "scripts": {
