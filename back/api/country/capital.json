@@ -21,7 +21,6 @@
   },
   { "name": "Angola", "capital": "Luanda", "iso2": "AO", "iso3": "AGO" },
   { "name": "Anguilla", "capital": "The Valley", "iso2": "AI", "iso3": "AIA" },
-  { "name": "Antarctica", "capital": "", "iso2": "AQ", "iso3": "ATA" },
   {
     "name": "Antigua and Barbuda",
     "capital": "St. John's",
@@ -50,12 +49,7 @@
   { "name": "Bermuda", "capital": "Hamilton", "iso2": "BM", "iso3": "BMU" },
   { "name": "Bhutan", "capital": "Thimphu", "iso2": "BT", "iso3": "BTN" },
   { "name": "Bolivia", "capital": "Sucre", "iso2": "BO", "iso3": "BOL" },
-  {
-    "name": "Bonaire, Saint Eustatius and Saba ",
-    "capital": "",
-    "iso2": "BQ",
-    "iso3": "BES"
-  },
+
   {
     "name": "Bosnia and Herzegovina",
     "capital": "Sarajevo",
@@ -63,7 +57,6 @@
     "iso3": "BIH"
   },
   { "name": "Botswana", "capital": "Gaborone", "iso2": "BW", "iso3": "BWA" },
-  { "name": "Bouvet Island", "capital": "", "iso2": "BV", "iso3": "BVT" },
   { "name": "Brazil", "capital": "Brasilia", "iso2": "BR", "iso3": "BRA" },
   {
     "name": "British Indian Ocean Territory",
@@ -234,12 +227,7 @@
   { "name": "Guinea-Bissau", "capital": "Bissau", "iso2": "GW", "iso3": "GNB" },
   { "name": "Guyana", "capital": "Georgetown", "iso2": "GY", "iso3": "GUY" },
   { "name": "Haiti", "capital": "Port-au-Prince", "iso2": "HT", "iso3": "HTI" },
-  {
-    "name": "Heard Island and McDonald Islands",
-    "capital": "",
-    "iso2": "HM",
-    "iso3": "HMD"
-  },
+
   { "name": "Honduras", "capital": "Tegucigalpa", "iso2": "HN", "iso3": "HND" },
   { "name": "Hong Kong", "capital": "Hong Kong", "iso2": "HK", "iso3": "HKG" },
   { "name": "Hungary", "capital": "Budapest", "iso2": "HU", "iso3": "HUN" },
@@ -507,7 +495,6 @@
   { "name": "Thailand", "capital": "Bangkok", "iso2": "TH", "iso3": "THA" },
   { "name": "Timor-Leste", "capital": "Dili", "iso2": "TL", "iso3": "TLS" },
   { "name": "Togo", "capital": "Lome", "iso2": "TG", "iso3": "TGO" },
-  { "name": "Tokelau", "capital": "", "iso2": "TK", "iso3": "TKL" },
   { "name": "Tonga", "capital": "Nuku'alofa", "iso2": "TO", "iso3": "TON" },
   {
     "name": "Trinidad and Tobago",
@@ -556,12 +543,7 @@
     "iso2": "US",
     "iso3": "USA"
   },
-  {
-    "name": "United States Minor Outlying Islands",
-    "capital": "",
-    "iso2": "UM",
-    "iso3": "UMI"
-  },
+
   { "name": "Uruguay", "capital": "Montevideo", "iso2": "UY", "iso3": "URY" },
   { "name": "Uzbekistan", "capital": "Tashkent", "iso2": "UZ", "iso3": "UZB" },
   { "name": "Vanuatu", "capital": "Port Vila", "iso2": "VU", "iso3": "VUT" },
