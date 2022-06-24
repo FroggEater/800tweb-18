@@ -19,90 +19,70 @@ module.exports = {
   //
   // }
 
-  " 18 15 * * *": async () => {
-    // console.log("deleting...");
-    // try {
-    //   let results = await strapi
-    //     .query("airport")
-    //     .find({ _limit: 100, id_null: false });
-    //   {
-    //     while (results != []) {
-    //       let entity = JSON.parse(JSON.stringify(results));
-    //       for (let i = 0; i < results.length; i++) {
-    //         await strapi.query("airport").delete({ id: entity[i].id });
-    //       }
-    //       console.log("100 countries deleted");
-    //       results = await strapi
-    //         .query("airport")
-    //         .find({ _limit: 100, id_null: false });
-    //     }
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    // }
-    // console.log("Ending");
-
-    const airports = require("../../api/airport/airports.json");
-    const airports_result = JSON.parse(JSON.stringify(airports));
-
-    console.log("adding airports data...");
-    airports_result.forEach(async (entry) => {
-      //add country
-      let current_country = await strapi.services["country"].findOne({
-        name: entry.country,
-      });
-      if (!current_country) {
-        await strapi.services["country"].create({
-          name: entry.country,
-        });
+  " 13 14 * 6 *": async () => {
+    console.log("deleting...");
+    //delete country
+    try {
+      let results = await strapi
+        .query("country")
+        .find({ _limit: 100, id_null: false });
+      {
+        while (results.length > 0) {
+          let entity = JSON.parse(JSON.stringify(results));
+          for (let i = 0; i < results.length; i++) {
+            await strapi.query("country").delete({ id: entity[i].id });
+          }
+          console.log("100 countries deleted");
+          results = await strapi
+            .query("country")
+            .find({ _limit: 100, id_null: false });
+        }
       }
-      //add city
-      let current_city = await strapi.services["city"].findOne({
-        name: entry.city,
-      });
-      if (!current_city) {
-        await strapi.services["city"].create({
-          name: entry.city,
-          country: current_country.id,
-        });
+    } catch (err) {
+      console.log(err);
+    }
+    //delete city
+    try {
+      let results = await strapi
+        .query("city")
+        .find({ _limit: 100, id_null: false });
+      {
+        while (results.length > 0) {
+          let entity = JSON.parse(JSON.stringify(results));
+          for (let i = 0; i < results.length; i++) {
+            await strapi.query("city").delete({ id: entity[i].id });
+          }
+          console.log("100 cities deleted");
+          results = await strapi
+            .query("city")
+            .find({ _limit: 100, id_null: false });
+        }
       }
-      //add airport
-      if (entry.name === "") {
-        await strapi.services["airport"].create({
-          name: current_city.id + " Airport",
-          trigram: entry.code,
-          longitude: entry.lon,
-          latitude: entry.lat,
-          city: current_city.id,
-        });
-      } else {
-        await strapi.services["airport"].create({
-          name: entry.name,
-          trigram: entry.code,
-          longitude: entry.lon,
-          latitude: entry.lat,
-          city: current_city.id,
-        });
-      }
-    });
+    } catch (err) {
+      console.log(err);
+    }
+    console.log("Delete task ending");
 
-    const data = require("../../api/country/capital.json");
-    const result = JSON.parse(JSON.stringify(data));
+    const countries = require("../../api/country/capital.json");
+    const result = JSON.parse(JSON.stringify(countries));
 
     console.log("adding data ...");
     result.forEach(async (entry) => {
+      await strapi.services["country"].create({
+        name: entry.name,
+        trigram: entry.iso3,
+      });
+
       let current_country = await strapi.services["country"].findOne({
         name: entry.name,
       });
-      if (current_country) {
-        await strapi.services["country"].update(
-          { id: current_country.id },
-          {
-            trigram: entry.iso3,
-          }
-        );
+      if (entry.name !== "") {
+        await strapi.services["city"].create({
+          name: entry.capital,
+          country: current_country.id,
+        });
       }
+      console.log("ending country and capital");
     });
-    console.log("ending...");
   },
 };
