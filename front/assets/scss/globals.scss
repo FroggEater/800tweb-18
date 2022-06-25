@@ -1,3 +1,73 @@
+// ANCHOR - Shared application classes
+
+.ds-app {
+  &-container {
+    width: 100vw;
+    height: 100vh;
+
+    background-image: url("../images/img_background.png");
+    background-position: center;
+    background-size: cover;
+  }
+}
+
+// ANCHOR - Shared flex classes
+
+%ds-flex-shared {
+  display: flex;
+  align-items: center;
+}
+
+%ds-flex-row-shared {
+  @extend %ds-flex-shared;
+
+  flex-direction: row;
+}
+
+%ds-flex-col-shared {
+  @extend %ds-flex-shared;
+
+  flex-direction: column;
+}
+
+.ds-flex {
+  &-row-start {
+    @extend %ds-flex-row-shared;
+
+    justify-content: start;
+  }
+
+  &-row-center {
+    @extend %ds-flex-row-shared;
+
+    justify-content: center;
+  }
+
+  &-row-end {
+    @extend %ds-flex-row-shared;
+
+    justify-content: end;
+  }
+
+  &-col-start {
+    @extend %ds-flex-col-shared;
+
+    justify-content: start;
+  }
+
+  &-col-center {
+    @extend %ds-flex-col-shared;
+
+    justify-content: center;
+  }
+
+  &-col-end {
+    @extend %ds-flex-col-shared;
+
+    justify-content: end;
+  }
+}
+
 // ANCHOR - Shared text classes
 
 %ds-text-shared {
