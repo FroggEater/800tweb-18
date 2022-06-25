@@ -15,11 +15,11 @@
       v-if="icon"
       class="button-feather"
       :type="icon"
-      :size="small ? '1.25rem' : '1.75rem'"
+      :size="small ? '20px' : '28px'"
       :stroke-width="small ? '2.5px' : '2px'"
       :animation="loading ? 'spin' : ''"
     />
-    <slot v-else />
+    <slot />
   </div>
 </template>
 
