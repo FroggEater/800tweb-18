@@ -11,6 +11,42 @@
   }
 }
 
+// ANCHOR - Shared list classes
+
+.ds-gap {
+  &-col {
+    margin-bottom: 1rem;
+  
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+    
+    &-double {
+      margin-bottom: 2rem;
+    
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &-row {
+    margin-right: 1rem;
+  
+    &:last-of-type {
+      margin-right: 0;
+    }
+    
+    &-double {
+      margin-right: 2rem;
+    
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
 // ANCHOR - Shared flex classes
 
 %ds-flex-shared {
@@ -31,40 +67,80 @@
 }
 
 .ds-flex {
-  &-row-start {
-    @extend %ds-flex-row-shared;
+  &-row {
+    &-start {
+      @extend %ds-flex-row-shared;
+  
+      justify-content: start;
+    }
+  
+    &-center {
+      @extend %ds-flex-row-shared;
+  
+      justify-content: center;
+    }
+  
+    &-end {
+      @extend %ds-flex-row-shared;
+  
+      justify-content: end;
+    }
 
-    justify-content: start;
+    &-between {
+      @extend %ds-flex-row-shared;
+  
+      justify-content: space-between;
+    }
+
+    &-around {
+      @extend %ds-flex-row-shared;
+  
+      justify-content: space-around;
+    }
+
+    &-even {
+      @extend %ds-flex-row-shared;
+  
+      justify-content: space-evenly;
+    }
   }
 
-  &-row-center {
-    @extend %ds-flex-row-shared;
+  &-col {
+    &-start {
+      @extend %ds-flex-col-shared;
+  
+      justify-content: start;
+    }
+  
+    &-center {
+      @extend %ds-flex-col-shared;
+  
+      justify-content: center;
+    }
+  
+    &-end {
+      @extend %ds-flex-col-shared;
+  
+      justify-content: end;
+    }
 
-    justify-content: center;
-  }
+    &-between {
+      @extend %ds-flex-col-shared;
+  
+      justify-content: space-between;
+    }
 
-  &-row-end {
-    @extend %ds-flex-row-shared;
+    &-around {
+      @extend %ds-flex-col-shared;
+  
+      justify-content: space-around;
+    }
 
-    justify-content: end;
-  }
-
-  &-col-start {
-    @extend %ds-flex-col-shared;
-
-    justify-content: start;
-  }
-
-  &-col-center {
-    @extend %ds-flex-col-shared;
-
-    justify-content: center;
-  }
-
-  &-col-end {
-    @extend %ds-flex-col-shared;
-
-    justify-content: end;
+    &-even {
+      @extend %ds-flex-col-shared;
+  
+      justify-content: space-evenly;
+    }
   }
 }
 

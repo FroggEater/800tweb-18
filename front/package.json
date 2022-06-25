@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@nuxtjs/google-fonts": "^2.0.0",
     "@nuxtjs/style-resources": "^1.2.1",
     "bootstrap": "^4.6.1",
     "bootstrap-vue": "^2.21.2",
