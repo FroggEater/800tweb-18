@@ -8,7 +8,7 @@
 <script>
 import Vue from "vue";
 import VueFeather from "vue-feather";
-import Input from "../components/Input"
+import Input from "../components/shared/Input"
 
 Vue.component("feather", VueFeather);
 Vue.component("Input", Input)

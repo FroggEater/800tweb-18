@@ -1,0 +1,83 @@
+// ANCHOR - Shared text classes
+
+%ds-text-shared {
+  color: $color-dark;
+  font-family: "Barlow";
+  font-style: normal;
+  align-items: center;
+}
+
+.ds-text {
+  &-title {
+    @extend %ds-text-shared;
+
+    font-size: 3rem;
+    font-weight: 700;
+    text-decoration-line: underline;
+    text-transform: uppercase;
+  }
+
+  &-header {
+    @extend %ds-text-shared;
+
+    font-size: 2.25rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  &-subtitle {
+    @extend %ds-text-shared;
+
+    color: $color-dark-sub;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+
+  &-body {
+    @extend %ds-text-shared;
+
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+
+  &-body-smaller {
+    @extend %ds-text-shared;
+
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+
+  &-content {
+    @extend %ds-text-shared;
+
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  &-content--active {
+    @extend %ds-text-shared;
+
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-decoration-line: underline;
+    text-transform: uppercase;
+  }
+
+  &-content-small {
+    @extend %ds-text-shared;
+
+    font-size: 1.125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  &-content-small--active {
+    @extend %ds-text-shared;
+
+    font-size: 1.125rem;
+    font-weight: 600;
+    text-decoration-line: underline;
+    text-transform: uppercase;
+  }
+}
