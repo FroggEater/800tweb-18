@@ -11,6 +11,11 @@
 
     <SharedButton class="ds-gap-col" icon="settings"/>
     <SharedButton class="ds-gap-col" icon="settings" small/>
+
+    <SharedInput class="ds-gap-col" placeholder="Placeholder"/>
+    <SharedInput class="ds-gap-col" placeholder="Placeholder" small/>
+    <SharedInput class="ds-gap-col" placeholder="Placeholder" button-text="button"/>
+    <SharedInput class="ds-gap-col" placeholder="Placeholder" button-text="button" small/>
   </div>
 </template>
 

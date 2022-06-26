@@ -1,43 +1,122 @@
 <template>
-  <div class="perdu d-flex flex-column align-items-center p-5">
-      <input type="text" :placeholder="`${placeholder}`" :class="{'small': small }" />
+  <div class="ds-input-wrapper">
+    <input
+      v-model="value"
+      type="text"
+      :class="computedClass"
+      :placeholder="placeholder"
+    />
+    <div :class="computedButtonsClass">
+      <SharedButton
+        v-if="value"
+        icon="x"
+        negative
+        :small="small"
+        @click="value = undefined"
+      />
+      <SharedButton
+        v-if="buttonText"
+        class="ml-2"
+        positive
+        :small="small"
+        @click="() => handleClick()"
+      >
+        {{ buttonText }}
+      </SharedButton>
+    </div>
   </div>
 </template>
 
 <script>
 import Vue from "vue";
 
-export default{
-    name:"Input", 
-    props:{
-        placeholder:String, 
-        small: Boolean
-    }
-}
+export default Vue.extend({
+  props: {
+    buttonAction: { type: Function, default: () => {} },
+    buttonText: { type: String, default: "" },
+    placeholder: { type: String, default: "" },
+    small: Boolean,
+  },
+  data() {
+    return {
+      value: undefined,
+    };
+  },
+  watch: {
+    value: function (val) {
+      console.log(val);
+    },
+  },
+  computed: {
+    computedClass: function () {
+      const { small } = this;
+      const currClasses = ["ds-input"];
+      const textClass = small ? "ds-text-body-small" : "ds-text-body";
+
+      return [...currClasses, textClass, small && "ds-input-small"];
+    },
+    computedButtonsClass: function () {
+      const { small } = this;
+      const currClasses = ["ds-input-buttons", "ds-flex-row-end"];
+
+      return [...currClasses, small && "ds-input-buttons-small"];
+    },
+  },
+  methods: {
+    handleClick: function () {
+      this.buttonAction();
+      this.$emit("click");
+    },
+  },
+});
 </script>
 
-<style lang="scss" scoped>
-input {
-  width: 20rem;
-  border: #6D7889 3px solid;
-  border-radius: 50px;
-  padding-left: 2vh;
-  color:#BBBAB9;
-  size: 4rem;
+<style scoped lang="scss">
+.ds-input {
+  // Sizing and structure
+  border-radius: 3rem;
+  height: 4rem;
+  padding: 0 2rem;
 
-    &:hover {
-      border-color: #354156;
-    }
-
-    &:focus{
-        border-color: #354156;
-        background-color: white;
-        color:#354156; 
-    }
-
-    &.small{
-      size: 3rem;
-    }
-
+  &-small {
+    height: 3rem;
   }
+
+  &-wrapper {
+    position: relative;
+  }
+
+  &-buttons {
+    height: 4rem;
+    padding: 0.5rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    &-small {
+      height: 3rem;
+    }
+  }
+
+  // Colors and states
+  background: $color-light;
+  border: 2px solid $color-dark-sub;
+  outline: none !important;
+  transition: 0.25s;
+
+  &::placeholder {
+    color: $color-light-sub;
+  }
+
+  &:hover {
+    border-color: $color-dark;
+    transition: 0.25s;
+  }
+
+  &:focus {
+    background: $color-light-lighter;
+    border-color: $color-dark;
+    transition: 0.25s;
+  }
+}
 </style>

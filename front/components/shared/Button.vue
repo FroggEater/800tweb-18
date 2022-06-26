@@ -2,7 +2,7 @@
   <div :class="computedClass" @click.stop="() => handleClick()">
     <feather
       v-if="icon"
-      :class="{'mr-2': hasContentInSlot, 'mx-auto': !hasContentInSlot}"
+      :class="{ 'mr-2': hasContentInSlot, 'mx-auto': !hasContentInSlot }"
       :type="icon"
       :size="small ? '20px' : '28px'"
       :animation="loading ? 'spin' : ''"
@@ -11,48 +11,46 @@
   </div>
 </template>
 
-<script lang="js">
+<script>
 import Vue from "vue";
-import {mapState} from "vuex";
 
 export default Vue.extend({
   props: {
-    action: {type: Function, default: () => {}},
-    icon: {type: String, default: ""},
+    action: { type: Function, default: () => {} },
+    icon: { type: String, default: "" },
     small: Boolean,
     link: Boolean,
     positive: Boolean,
     negative: Boolean,
-    loading: Boolean
+    loading: Boolean,
   },
   computed: {
     computedClass: function () {
-      const {small, link, positive, negative, hasContentInSlot} = this;
+      const { small, link, positive, negative, hasContentInSlot } = this;
       const currClasses = ["ds-button", "ds-flex-row-start"];
       const textClass = small ? "ds-text-content-small" : "ds-text-content";
 
       return [
         ...currClasses,
         textClass,
-        (small && "ds-button-small"),
-        (link && "ds-button-link"),
-        (positive && "ds-button-pos"),
-        (negative && "ds-button-neg"),
-        (!hasContentInSlot && "ds-button-icon")
+        small && "ds-button-small",
+        link && "ds-button-link",
+        positive && "ds-button-pos",
+        negative && "ds-button-neg",
+        !hasContentInSlot && "ds-button-icon",
       ].join(" ");
     },
     hasContentInSlot: function () {
       return !!this.$slots.default;
     },
-    ...mapState(["colors"])
   },
   methods: {
     handleClick: function () {
       this.action();
       this.$emit("click");
-    }
-  }
-})
+    },
+  },
+});
 </script>
 
 <style scoped lang="scss">
