@@ -5,6 +5,7 @@
       type="text"
       :class="computedClass"
       :placeholder="placeholder"
+      @keyup="(e) => handleKeyUp(e, value)"
     />
     <div :class="computedButtonsClass">
       <SharedButton
@@ -12,14 +13,14 @@
         icon="x"
         negative
         :small="small"
-        @click="value = undefined"
+        @click="() => handleClear()"
       />
       <SharedButton
         v-if="buttonText"
         class="ml-2"
         positive
         :small="small"
-        @click="() => handleClick()"
+        @click="() => handleClick(value)"
       >
         {{ buttonText }}
       </SharedButton>
@@ -42,11 +43,6 @@ export default Vue.extend({
       value: undefined,
     };
   },
-  watch: {
-    value: function (val) {
-      console.log(val);
-    },
-  },
   computed: {
     computedClass: function () {
       const { small } = this;
@@ -63,9 +59,18 @@ export default Vue.extend({
     },
   },
   methods: {
-    handleClick: function () {
+    handleClick: function (val) {
+      if (!val) return;
       this.buttonAction();
-      this.$emit("click");
+      this.$emit("submit", val);
+    },
+    handleKeyUp: function (e, val) {
+      if (!val) return;
+      if (e.key === "Enter") this.$emit("submit", val);
+    },
+    handleClear: function () {
+      this.value = undefined;
+      this.$emit("clear");
     },
   },
 });
@@ -76,6 +81,7 @@ export default Vue.extend({
   // Sizing and structure
   border-radius: 3rem;
   height: 4rem;
+  width: 100%;
   padding: 0 2rem;
 
   &-small {

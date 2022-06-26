@@ -2,6 +2,11 @@
 
 .ds-app {
   &-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 2rem;
+    margin: 0;
     width: 100%;
     height: 100%;
 
@@ -10,8 +15,7 @@
     background-position: center;
     background-size: cover;
 
-    overflow: auto;
-    overscroll-behavior: none;
+    overflow: hidden;
   }
 }
 
@@ -72,6 +76,10 @@
 }
 
 .ds-flex {
+  &-stretch {
+    align-items: stretch;
+  }
+
   &-row {
     &-start {
       @extend %ds-flex-row-shared;
