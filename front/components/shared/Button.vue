@@ -38,7 +38,7 @@ export default Vue.extend({
         positive && "ds-button-pos",
         negative && "ds-button-neg",
         !hasContentInSlot && "ds-button-icon",
-      ].join(" ");
+      ];
     },
     hasContentInSlot: function () {
       return !!this.$slots.default;
