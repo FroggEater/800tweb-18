@@ -40,6 +40,7 @@ export default {
     "bootstrap-vue/nuxt",
     "@nuxtjs/style-resources",
     "@nuxtjs/google-fonts",
+    "@nuxtjs/axios",
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
