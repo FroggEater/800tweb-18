@@ -20,10 +20,12 @@
 <script>
 import Vue from "vue";
 import VueFeather from "vue-feather";
+import { MixinDB } from "@/mixins";
 
 Vue.component("feather", VueFeather);
 
 export default Vue.extend({
+  mixins: [MixinDB],
   data() {
     return {
       isExpanded: false,
@@ -46,6 +48,7 @@ export default Vue.extend({
     handleSubmit: function (v) {
       console.log("Submit", v);
       this.isExpanded = true;
+      this.getSearchResults(v);
     },
   },
 });
