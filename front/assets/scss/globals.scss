@@ -2,12 +2,16 @@
 
 .ds-app {
   &-container {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
 
     background-image: url("../images/img_background.png");
+    background-attachment: fixed;
     background-position: center;
     background-size: cover;
+
+    overflow: auto;
+    overscroll-behavior: none;
   }
 }
 
@@ -17,14 +21,14 @@
   &-col {
     margin-bottom: 1rem;
   
-    &:last-of-type {
+    &:last-child {
       margin-bottom: 0;
     }
     
     &-double {
       margin-bottom: 2rem;
     
-      &:last-of-type {
+      &:last-child {
         margin-bottom: 0;
       }
     }
@@ -33,14 +37,14 @@
   &-row {
     margin-right: 1rem;
   
-    &:last-of-type {
+    &:last-child {
       margin-right: 0;
     }
     
     &-double {
       margin-right: 2rem;
     
-      &:last-of-type {
+      &:last-child {
         margin-right: 0;
       }
     }
@@ -50,8 +54,9 @@
 // ANCHOR - Shared flex classes
 
 %ds-flex-shared {
-  display: flex;
   align-items: center;
+  display: flex;
+  flex-shrink: 0;
 }
 
 %ds-flex-row-shared {
@@ -186,7 +191,7 @@
     font-weight: 500;
   }
 
-  &-body-smaller {
+  &-body-small {
     @extend %ds-text-shared;
 
     font-size: 1.125rem;
