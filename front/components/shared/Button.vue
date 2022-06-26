@@ -1,22 +1,10 @@
 <template>
-  <div
-    :class="{
-      'button d-flex align-items-center justify-content-center': true,
-      'button-small': small,
-      'button-icon': icon,
-      'button-link': link,
-      'button-accent': accent,
-      'button-accent-pos': accent === 'positive',
-      'button-accent-neg': accent === 'negative',
-    }"
-    @click.stop="() => handleClick()"
-  >
+  <div :class="computedClass" @click.stop="() => handleClick()">
     <feather
       v-if="icon"
-      class="button-feather"
+      :class="{'mr-2': hasContentInSlot, 'mx-auto': !hasContentInSlot}"
       :type="icon"
       :size="small ? '20px' : '28px'"
-      :stroke-width="small ? '2.5px' : '2px'"
       :animation="loading ? 'spin' : ''"
     />
     <slot />
@@ -29,19 +17,38 @@ import {mapState} from "vuex";
 
 export default Vue.extend({
   props: {
-    action: Function,
-    icon: String,
-    accent: String,
+    action: {type: Function, default: () => {}},
+    icon: {type: String, default: ""},
     small: Boolean,
     link: Boolean,
+    positive: Boolean,
+    negative: Boolean,
     loading: Boolean
   },
   computed: {
+    computedClass: function () {
+      const {small, link, positive, negative, hasContentInSlot} = this;
+      const currClasses = ["ds-button", "ds-flex-row-start"];
+      const textClass = small ? "ds-text-content-small" : "ds-text-content";
+
+      return [
+        ...currClasses,
+        textClass,
+        (small && "ds-button-small"),
+        (link && "ds-button-link"),
+        (positive && "ds-button-pos"),
+        (negative && "ds-button-neg"),
+        (!hasContentInSlot && "ds-button-icon")
+      ].join(" ");
+    },
+    hasContentInSlot: function () {
+      return !!this.$slots.default;
+    },
     ...mapState(["colors"])
   },
   methods: {
     handleClick: function () {
-      if (this.action) this.action();
+      this.action();
       this.$emit("click");
     }
   }
@@ -49,70 +56,94 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
-.button {
+.ds-button {
+  // Sizing and structure
+  border-radius: 3rem;
+  cursor: pointer;
   height: 3rem;
-  border: 2px solid $color-dark-sub;
-  border-radius: 100px;
-  background: transparent;
-  color: $color-dark;
-
-  &:hover {
-    border-color: $color-dark;
-  }
-
-  &:active {
-    color: $color-light;
-  }
+  padding: 0 1rem;
 
   &-small {
+    border-radius: 2rem;
     height: 2rem;
+    padding: 0 0.5rem;
+  }
 
-    &.button-icon {
+  &-icon {
+    padding: 0;
+    width: 3rem;
+
+    &.ds-button-small {
       width: 2rem;
     }
   }
 
-  &-icon {
-    width: 3rem;
+  // Colors and states
+  background: transparent;
+  border: 2px solid $color-dark-sub;
+  transition: 0.25s;
+
+  &:hover {
+    border-color: $color-dark;
+    transition: 0.25s;
+  }
+
+  &:active {
+    background: $color-dark;
+    border-color: $color-dark;
+    color: $color-light;
+    transition: 0s;
+  }
+
+  &-pos {
+    color: $color-positive;
+    border-color: $color-positive;
+
+    &:hover {
+      color: $color-light;
+      background: $color-positive;
+      border-color: $color-positive;
+    }
+
+    &:active {
+      color: $color-light;
+      background: $color-positive-darker;
+      border-color: $color-positive-darker;
+    }
+  }
+
+  &-neg {
+    color: $color-negative;
+    border-color: $color-negative;
+
+    &:hover {
+      color: $color-light;
+      background: $color-negative;
+      border-color: $color-negative;
+    }
+
+    &:active {
+      color: $color-light;
+      background: $color-negative-darker;
+      border-color: $color-negative-darker;
+    }
   }
 
   &-link {
-    border: none;
-  }
+    border-color: transparent;
+    color: $color-dark;
 
-  &-accent {
-    &-pos {
-      border-color: $color-positive;
-      color: $color-positive;
-
-      &:hover {
-        border: none;
-        background: $color-positive;
-        color: $color-light;
-      }
-
-      &:active {
-        border: none;
-        background: $color-positive-darker;
-        color: $color-light;
-      }
+    &:hover {
+      border-color: transparent;
+      color: $color-dark;
+      text-decoration-line: underline;
     }
 
-    &-neg {
-      border-color: $color-negative;
-      color: $color-negative;
-
-      &:hover {
-        border: none;
-        background: $color-negative;
-        color: $color-light;
-      }
-
-      &:active {
-        border: none;
-        background: $color-negative-darker;
-        color: $color-light;
-      }
+    &:active {
+      background: $color-light-lighter;
+      border-color: transparent;
+      color: $color-dark;
+      text-decoration-line: underline;
     }
   }
 }
