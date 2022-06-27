@@ -24,14 +24,14 @@
 .ds-gap {
   &-col {
     margin-bottom: 1rem;
-  
+
     &:last-child {
       margin-bottom: 0;
     }
-    
+
     &-double {
       margin-bottom: 2rem;
-    
+
       &:last-child {
         margin-bottom: 0;
       }
@@ -40,14 +40,14 @@
 
   &-row {
     margin-right: 1rem;
-  
+
     &:last-child {
       margin-right: 0;
     }
-    
+
     &-double {
       margin-right: 2rem;
-    
+
       &:last-child {
         margin-right: 0;
       }
@@ -80,40 +80,48 @@
     align-items: stretch;
   }
 
+  &-start {
+    align-items: flex-start;
+  }
+
+  &-end {
+    align-items: flex-end;
+  }
+
   &-row {
     &-start {
       @extend %ds-flex-row-shared;
-  
+
       justify-content: start;
     }
-  
+
     &-center {
       @extend %ds-flex-row-shared;
-  
+
       justify-content: center;
     }
-  
+
     &-end {
       @extend %ds-flex-row-shared;
-  
+
       justify-content: end;
     }
 
     &-between {
       @extend %ds-flex-row-shared;
-  
+
       justify-content: space-between;
     }
 
     &-around {
       @extend %ds-flex-row-shared;
-  
+
       justify-content: space-around;
     }
 
     &-even {
       @extend %ds-flex-row-shared;
-  
+
       justify-content: space-evenly;
     }
   }
@@ -121,37 +129,37 @@
   &-col {
     &-start {
       @extend %ds-flex-col-shared;
-  
+
       justify-content: start;
     }
-  
+
     &-center {
       @extend %ds-flex-col-shared;
-  
+
       justify-content: center;
     }
-  
+
     &-end {
       @extend %ds-flex-col-shared;
-  
+
       justify-content: end;
     }
 
     &-between {
       @extend %ds-flex-col-shared;
-  
+
       justify-content: space-between;
     }
 
     &-around {
       @extend %ds-flex-col-shared;
-  
+
       justify-content: space-around;
     }
 
     &-even {
       @extend %ds-flex-col-shared;
-  
+
       justify-content: space-evenly;
     }
   }
@@ -208,7 +216,7 @@
 
   &-content {
     @extend %ds-text-shared;
-    
+
     font-size: 1.25rem;
     font-weight: 600;
     text-transform: uppercase;

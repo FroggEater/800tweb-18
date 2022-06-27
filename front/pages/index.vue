@@ -1,6 +1,9 @@
 <template>
-  <div class="ds-app-container ds-flex-row-center ds-flex-stretch">
-    <div class="ds-flex-col-start">
+  <div class="ds-app-container ds-flex-row-between ds-flex-stretch">
+    <div class="ds-app-menu">
+      <ListMenu alignment="left" @click="(l) => handleMenuClick(l)" />
+    </div>
+    <div class="ds-app-main ds-flex-col-start">
       <SharedInput
         placeholder="Search for a destination..."
         button-text="Search"
@@ -8,11 +11,23 @@
         @submit="(v) => handleSubmit(v)"
         @clear="() => (isExpanded = false)"
       />
-      <SharedCard :class="computedSearchContainerClass" row>
-        <SharedCard col>test</SharedCard>
-        <SharedCard col>test</SharedCard>
-        <SharedCard col>test</SharedCard>
-      </SharedCard>
+      <SharedWrapper :class="computedSearchContainerClass">
+        <SharedWrapper col
+          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe,
+          error.</SharedWrapper
+        >
+        <SharedWrapper col
+          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam,
+          deleniti!</SharedWrapper
+        >
+        <SharedWrapper col
+          >Lorem ipsum, dolor sit amet consectetur adipisicing elit. A,
+          omnis!</SharedWrapper
+        >
+      </SharedWrapper>
+    </div>
+    <div class="ds-app-stepper">
+      <ListMenu alignment="right" />
     </div>
   </div>
 </template>
@@ -50,12 +65,30 @@ export default Vue.extend({
       this.isExpanded = true;
       this.getSearchResults(v);
     },
+    handleMenuClick: function (v) {
+      console.log("Menu", v);
+    },
   },
 });
 </script>
 
 <style scoped lang="scss">
 .ds-app {
+  &-menu {
+    align-self: center;
+    flex-basis: 16rem;
+  }
+
+  &-stepper {
+    align-self: center;
+    flex-basis: 16rem;
+  }
+
+  &-main {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+
   &-search-bar {
     width: 60rem;
     top: calc((100% - 4rem) / 2);
