@@ -7,7 +7,9 @@
       :size="small ? '20px' : '28px'"
       :animation="loading ? 'spin' : ''"
     />
-    <slot />
+    <div :class="computedLabelClass">
+      <slot />
+    </div>
   </div>
 </template>
 
@@ -23,11 +25,24 @@ export default Vue.extend({
     positive: Boolean,
     negative: Boolean,
     loading: Boolean,
+    stretch: Boolean,
+    hideSlot: Boolean,
   },
   computed: {
     computedClass: function () {
-      const { small, link, positive, negative, hasContentInSlot } = this;
-      const currClasses = ["ds-button", "ds-flex-row-start"];
+      const {
+        small,
+        link,
+        positive,
+        negative,
+        stretch,
+        hideSlot,
+        hasContentInSlot,
+      } = this;
+      const currClasses = [
+        "ds-button",
+        stretch ? "ds-flex-row-between" : "ds-flex-row-start",
+      ];
       const textClass = small ? "ds-text-content-small" : "ds-text-content";
 
       return [
@@ -37,11 +52,19 @@ export default Vue.extend({
         link && "ds-button-link",
         positive && "ds-button-pos",
         negative && "ds-button-neg",
-        !hasContentInSlot && "ds-button-icon",
+        stretch && "ds-button-stretch",
+        (!hasContentInSlot || hideSlot) && "ds-button-icon",
       ];
     },
+    computedLabelClass: function () {
+      const { hideSlot } = this;
+
+      return ["ds-button-label", hideSlot && "ds-button-label--hidden"];
+    },
     hasContentInSlot: function () {
-      return !!this.$slots.default;
+      return (this.$slots.default || []).some(
+        (node) => node.text && node.text.trim()
+      );
     },
   },
   methods: {
@@ -61,6 +84,16 @@ export default Vue.extend({
   height: 3rem;
   padding: 0 1rem;
 
+  &-label {
+    opacity: 100%;
+    transition: 0.25s;
+
+    &--hidden {
+      opacity: 0%;
+      transition: 0.25s;
+    }
+  }
+
   &-small {
     border-radius: 2rem;
     height: 2rem;
@@ -73,6 +106,19 @@ export default Vue.extend({
 
     &.ds-button-small {
       width: 2rem;
+    }
+  }
+
+  &-stretch {
+    padding: 0;
+    width: 100%;
+
+    > * {
+      flex-shrink: 0;
+    }
+
+    .ds-button-label {
+      margin: auto;
     }
   }
 
