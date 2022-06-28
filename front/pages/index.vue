@@ -1,7 +1,7 @@
 <template>
   <div class="ds-app-container ds-flex-row-between ds-flex-stretch">
-    <div class="ds-app-menu">
-      <ListMenu alignment="left" @click="(l) => handleMenuClick(l)" />
+    <div class="ds-app-nav">
+      <SideNav height="17.25rem" left @click="(l) => handleMenuClick(l)" />
     </div>
     <div class="ds-app-main ds-flex-col-start">
       <SharedInput
@@ -11,23 +11,10 @@
         @submit="(v) => handleSubmit(v)"
         @clear="() => (isExpanded = false)"
       />
-      <SharedWrapper :class="computedSearchContainerClass">
-        <SharedWrapper col
-          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe,
-          error.</SharedWrapper
-        >
-        <SharedWrapper col
-          >Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam,
-          deleniti!</SharedWrapper
-        >
-        <SharedWrapper col
-          >Lorem ipsum, dolor sit amet consectetur adipisicing elit. A,
-          omnis!</SharedWrapper
-        >
-      </SharedWrapper>
+      <SharedWrapper :class="computedSearchContainerClass"> </SharedWrapper>
     </div>
     <div class="ds-app-stepper">
-      <ListMenu alignment="right" />
+      <SideStepper height="17.25rem" right />
     </div>
   </div>
 </template>
@@ -74,7 +61,7 @@ export default Vue.extend({
 
 <style scoped lang="scss">
 .ds-app {
-  &-menu {
+  &-nav {
     align-self: center;
     flex-basis: 16rem;
   }
@@ -89,26 +76,28 @@ export default Vue.extend({
     margin-right: 2rem;
   }
 
-  &-search-bar {
-    width: 60rem;
-    top: calc((100% - 4rem) / 2);
-    transition: 0.5s;
-
-    &--active {
-      top: 0;
+  &-search {
+    &-bar {
+      width: 60rem;
+      top: calc((100% - 4rem) / 2);
       transition: 0.5s;
+
+      &--active {
+        top: 0;
+        transition: 0.5s;
+      }
     }
-  }
 
-  &-search-container {
-    width: 60rem;
-    margin-top: 100rem;
-    flex-grow: 1;
-    transition: 0.5s;
-
-    &--active {
-      margin-top: 2rem;
+    &-container {
+      width: 60rem;
+      margin-top: 100vh;
+      flex-grow: 1;
       transition: 0.5s;
+
+      &--active {
+        margin-top: 2rem;
+        transition: 0.5s;
+      }
     }
   }
 }
