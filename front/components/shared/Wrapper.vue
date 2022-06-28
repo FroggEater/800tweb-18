@@ -14,24 +14,22 @@ import Vue from "vue";
 
 export default Vue.extend({
   props: {
-    height: { type: Number, default: 0 },
-    width: { type: Number, default: 0 },
-    col: Boolean,
-    dynamic: Boolean,
+    height: { type: String, default: "" },
+    width: { type: String, default: "" },
+    column: Boolean,
     nowrap: Boolean,
-    scroll: Boolean,
+    noscroll: Boolean,
   },
   computed: {
     computedClass: function () {
-      const { col, dynamic, scroll, nowrap } = this;
+      const { column, noscroll, nowrap } = this;
       const currClasses = ["ds-wrapper", "ds-flex-start"];
 
       return [
         ...currClasses,
-        col ? "ds-flex-col-start" : "ds-flex-row-start",
-        dynamic && "ds-wrapper-dynamic",
+        column ? "ds-flex-col-start" : "ds-flex-row-start",
         nowrap && "ds-wrapper-nowrap",
-        scroll && "ds-wrapper-scroll",
+        noscroll && "ds-wrapper-noscroll",
       ];
     },
     computedStyle: function () {
@@ -60,8 +58,8 @@ export default Vue.extend({
     flex-wrap: nowrap;
   }
 
-  &-scroll {
-    overflow: auto;
+  &-noscroll {
+    overflow-y: hidden;
   }
 }
 </style>

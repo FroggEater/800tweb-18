@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "epic-road-trip",
+    title: "Epic Road Trip",
     htmlAttrs: {
       lang: "en",
     },
