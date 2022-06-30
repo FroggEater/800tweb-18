@@ -6,6 +6,10 @@
       :class="computedClass"
       :placeholder="placeholder"
       @keyup="(e) => handleKeyUp(e, value)"
+      @input="(e) => handleInput(e)"
+      @focus="() => $emit('focus')"
+      @blur="() => $emit('blur')"
+      @update="(v) => $emit('update', v)"
     />
     <div :class="computedButtonsClass">
       <SharedButton
@@ -33,6 +37,7 @@ import Vue from "vue";
 
 export default Vue.extend({
   props: {
+    customValue: { type: String, default: "" },
     buttonAction: { type: Function, default: () => {} },
     buttonText: { type: String, default: "" },
     placeholder: { type: String, default: "" },
@@ -40,7 +45,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      value: undefined,
+      value: this.customValue,
     };
   },
   computed: {
@@ -71,6 +76,10 @@ export default Vue.extend({
     handleClear: function () {
       this.value = undefined;
       this.$emit("clear");
+    },
+    handleInput: function (event) {
+      this.$emit("update:customValue", event.target.value);
+      this.$emit("input", event.target.value);
     },
   },
 });

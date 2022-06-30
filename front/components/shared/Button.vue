@@ -2,7 +2,10 @@
   <div :class="computedClass" @click.stop="() => handleClick()">
     <feather
       v-if="icon"
-      :class="{ 'mr-2': hasContentInSlot, 'mx-auto': !hasContentInSlot }"
+      :class="{
+        'mr-2': hasContentInSlot && expanded,
+        'mx-auto': !hasContentInSlot,
+      }"
       :type="icon"
       :size="small ? '20px' : '28px'"
       :animation="loading ? 'spin' : ''"
@@ -20,12 +23,13 @@ export default Vue.extend({
   props: {
     action: { type: Function, default: () => {} },
     icon: { type: String, default: "" },
+    expanded: { type: Boolean, default: true },
     small: Boolean,
     link: Boolean,
     positive: Boolean,
     negative: Boolean,
     loading: Boolean,
-    stretch: Boolean,
+    collapse: Boolean,
     hideSlot: Boolean,
   },
   computed: {
@@ -35,13 +39,14 @@ export default Vue.extend({
         link,
         positive,
         negative,
-        stretch,
+        collapse,
         hideSlot,
+        expanded,
         hasContentInSlot,
       } = this;
       const currClasses = [
         "ds-button",
-        stretch ? "ds-flex-row-between" : "ds-flex-row-start",
+        collapse ? "ds-flex-row-between" : "ds-flex-row-start",
       ];
       const textClass = small ? "ds-text-content-small" : "ds-text-content";
 
@@ -52,7 +57,8 @@ export default Vue.extend({
         link && "ds-button-link",
         positive && "ds-button-pos",
         negative && "ds-button-neg",
-        stretch && "ds-button-stretch",
+        collapse && "ds-button-collapse",
+        collapse && expanded && "ds-button-collapse--active",
         (!hasContentInSlot || hideSlot) && "ds-button-icon",
       ];
     },
@@ -109,9 +115,15 @@ export default Vue.extend({
     }
   }
 
-  &-stretch {
+  &-collapse {
     padding: 0;
     width: 100%;
+    transition: 0.25s;
+
+    &:not(.ds-button-collapse--active) {
+      border: transparent !important;
+      transition: 0.25s;
+    }
 
     > * {
       flex-shrink: 0;

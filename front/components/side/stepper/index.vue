@@ -11,20 +11,12 @@
       class="ds-stepper-button-maximize"
       icon="x"
       positive
-      stretch
+      collapse
+      :expanded="isExpanded"
       :hide-slot="!isExpanded"
       @click="() => (isMaximized = !isMaximized)"
     >
       {{ isMaximized ? "Minimize" : "Maximize" }}
-    </SharedButton>
-    <!-- TODO > Remove, debug only -->
-    <SharedButton
-      icon="x"
-      stretch
-      :hide-slot="!isExpanded"
-      @click="() => _populateStepper(10)"
-    >
-      Populate
     </SharedButton>
 
     <SideStepperItem
@@ -33,6 +25,7 @@
       :key="idx"
       :separator="idx !== 0"
       :hide-info="!isExpanded"
+      :expanded="isExpanded"
       @click="() => removeStepFromTravel(idx)"
     />
 
@@ -40,7 +33,8 @@
       class="ds-stepper-button-minimize"
       icon="x"
       negative
-      stretch
+      collapse
+      :expanded="isExpanded"
       :hide-slot="!isExpanded"
       @click="() => clearTravel()"
     >

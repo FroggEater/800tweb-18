@@ -4,7 +4,7 @@
       <SideNav height="17.25rem" left @click="(l) => handleMenuClick(l)" />
     </div>
     <div class="ds-app-main ds-flex-col-start">
-      <SharedInput
+      <SharedAutocomplete
         placeholder="Search for a destination..."
         button-text="Search"
         :class="computedSearchBarClass"
@@ -22,9 +22,12 @@
 <script>
 import Vue from "vue";
 import VueFeather from "vue-feather";
+// import { Calendar, DatePicker } from "v-calendar";
 import { MixinDB } from "@/mixins";
 
 Vue.component("feather", VueFeather);
+// Vue.component("Calendar", Calendar);
+// Vue.component("DatePicker", DatePicker);
 
 export default Vue.extend({
   mixins: [MixinDB],
