@@ -19,6 +19,9 @@ export default Vue.extend({
       return `${computedURL}/${target}`;
     },
     customQuery: async function (type, target, body = {}) {},
+    getSearchSuggestions: async function (param) {
+
+    },
     getSearchResults: async function (param) {
       console.log("in getSearchResults", this.computedURL, param);
       const val = await this.$axios.$get("airports")

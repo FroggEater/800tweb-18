@@ -23,12 +23,19 @@ export default Vue.extend({
     name: { type: String, default: "No name..." },
     city: { type: String, default: "No city..." },
     country: { type: String, default: "No country..." },
+    expanded: { type: Boolean, default: true },
     separator: Boolean,
     hideInfo: Boolean,
   },
   computed: {
     computedClass: function () {
-      return ["ds-stepper-item", "ds-flex-row-between", "ds-text-content"];
+      const { expanded } = this;
+
+      return [
+        "ds-stepper-item",
+        "ds-flex-row-between",
+        expanded && "ds-stepper-item--active",
+      ];
     },
     computedInfoClass: function () {
       const { hideInfo } = this;
@@ -53,6 +60,8 @@ export default Vue.extend({
   border-radius: 3rem;
   cursor: pointer;
   width: 100%;
+  max-height: 3rem;
+  transition: 0.25s;
 
   > * {
     flex-shrink: 0;
@@ -72,6 +81,11 @@ export default Vue.extend({
 
   &-subinfo {
     width: 100%;
+  }
+
+  &--active {
+    max-height: 10rem;
+    transition: 0.25s;
   }
 
   // Colors and states

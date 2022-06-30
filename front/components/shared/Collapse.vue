@@ -41,7 +41,7 @@ export default Vue.extend({
       return [
         ...currClasses,
         alignClass,
-        maximize && "ds-collapse-maximize",
+        maximize && "ds-collapse--focus",
         isExpanded && "ds-collapse--active",
       ];
     },
@@ -59,13 +59,6 @@ export default Vue.extend({
 
 <style scoped lang="scss">
 .ds-collapse {
-  // !important to override the prop-set height if <maximize> is dynamically
-  // changed
-  &-maximize {
-    height: 100% !important;
-    transition: 0.25s;
-  }
-
   // Ugly as fuck, but fits like a glove with the icons of normal sized
   // stretched SharedButtons
   &:not(.ds-collapse--active) {
@@ -75,6 +68,14 @@ export default Vue.extend({
 
   &--active {
     width: 100%;
+    transition: 0.25s;
+  }
+
+  // !important to override the prop-set height if <maximize> is dynamically
+  // changed, though I have no clue why the new height ignores the set padding
+  // on the container (which is why we have a calc here)
+  &--focus {
+    height: calc(100vh - 4rem) !important;
     transition: 0.25s;
   }
 

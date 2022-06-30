@@ -11,7 +11,7 @@
       v-for="(link, idx) in links"
       class="ds-nav-button"
       link
-      stretch
+      collapse
       :key="idx"
       :icon="link.icon"
       :hide-slot="!isExpanded"
