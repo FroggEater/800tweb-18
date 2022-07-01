@@ -20,11 +20,6 @@ module.exports = ({ env }) => ({
       models: [
         {
           model: 'airports',
-          // exemple to add custom routes :
-          // routes: [
-          //     { path: "/airports/controller/:id", method: "GET" },
-          //     { path: "/airports/controller/:slug", method: "GET" },
-          // ]
           maxAge: 86400000,
           cacheTimeout: 60000,
         },
@@ -40,6 +35,9 @@ module.exports = ({ env }) => ({
         },
         {
           model: 'flights',
+          routes: [
+            { path: "/flights-amadeus", method: "POST" },
+          ],
           maxAge: 86400000,
           cacheTimeout: 60000,
         },
