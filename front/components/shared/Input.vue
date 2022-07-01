@@ -1,11 +1,11 @@
 <template>
   <div class="ds-input-wrapper">
     <input
-      v-model="value"
       type="text"
+      :value="customValue"
       :class="computedClass"
       :placeholder="placeholder"
-      @keyup="(e) => handleKeyUp(e, value)"
+      @keyup="(e) => handleKeyUp(e, customValue)"
       @input="(e) => handleInput(e)"
       @focus="() => $emit('focus')"
       @blur="() => $emit('blur')"
@@ -13,18 +13,18 @@
     />
     <div :class="computedButtonsClass">
       <SharedButton
-        v-if="value"
+        v-if="customValue"
         icon="x"
         negative
         :small="small"
-        @click="() => handleClear()"
+        @click="() => $emit('clear')"
       />
       <SharedButton
         v-if="buttonText"
         class="ml-2"
         positive
         :small="small"
-        @click="() => handleClick(value)"
+        @click="() => handleClick(customValue)"
       >
         {{ buttonText }}
       </SharedButton>
@@ -42,11 +42,6 @@ export default Vue.extend({
     buttonText: { type: String, default: "" },
     placeholder: { type: String, default: "" },
     small: Boolean,
-  },
-  data() {
-    return {
-      value: this.customValue,
-    };
   },
   computed: {
     computedClass: function () {
@@ -72,10 +67,6 @@ export default Vue.extend({
     handleKeyUp: function (e, val) {
       if (!val) return;
       if (e.key === "Enter") this.$emit("submit", val);
-    },
-    handleClear: function () {
-      this.value = undefined;
-      this.$emit("clear");
     },
     handleInput: function (event) {
       this.$emit("update:customValue", event.target.value);

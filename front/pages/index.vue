@@ -1,7 +1,7 @@
 <template>
   <div class="ds-app-container ds-flex-row-between ds-flex-stretch">
     <div class="ds-app-nav">
-      <SideNav height="17.25rem" left @click="(l) => handleMenuClick(l)" />
+      <SideNav height="13.25rem" left @click="(l) => handleMenuClick(l)" />
     </div>
     <div class="ds-app-main ds-flex-col-start">
       <SharedAutocomplete
@@ -14,7 +14,7 @@
       <SharedWrapper :class="computedSearchContainerClass"> </SharedWrapper>
     </div>
     <div class="ds-app-stepper">
-      <SideStepper height="17.25rem" right />
+      <SideStepper height="13.25rem" right />
     </div>
   </div>
 </template>

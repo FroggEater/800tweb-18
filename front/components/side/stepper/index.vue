@@ -9,9 +9,9 @@
   >
     <SharedButton
       class="ds-stepper-button-maximize"
-      icon="x"
       positive
       collapse
+      :icon="isMaximized ? 'minimize-2' : 'maximize-2'"
       :expanded="isExpanded"
       :hide-slot="!isExpanded"
       @click="() => (isMaximized = !isMaximized)"

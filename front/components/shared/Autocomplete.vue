@@ -6,6 +6,7 @@
       :button-text="buttonText"
       :placeholder="placeholder"
       :small="small"
+      :custom-value="value"
       @input="(v) => handleInput(v)"
       @focus="() => {}"
       @blur="() => (isExpanded = false)"
@@ -38,6 +39,13 @@ export default Vue.extend({
         { label: "Italie" },
         { label: "France" },
         { label: "UK" },
+        { label: "France" },
+        { label: "France" },
+        { label: "France" },
+        { label: "France" },
+        { label: "France" },
+        { label: "France" },
+        { label: "France" },
       ],
     },
     buttonAction: { type: Function, default: () => {} },
@@ -51,6 +59,11 @@ export default Vue.extend({
       value: undefined,
       items: this.forcedItems,
     };
+  },
+  watch: {
+    value: function (val) {
+      console.log("Autocomplete", val);
+    },
   },
   computed: {
     computedClass: function () {
@@ -99,6 +112,7 @@ export default Vue.extend({
       this.isExpanded = false;
     },
     handleClear: function () {
+      this.value = undefined;
       this.isExpanded = false;
       this.$emit("clear");
     },
@@ -117,8 +131,10 @@ export default Vue.extend({
     opacity: 0%;
     position: absolute;
     top: 4rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    flex-wrap: nowrap !important;
     transition: 0.25s;
-    overflow: hidden;
 
     &--active {
       height: 10rem;
@@ -127,6 +143,20 @@ export default Vue.extend({
     }
 
     &-entry {
+      cursor: pointer;
+      text-align: center;
+      width: 100%;
+      transition: 0.25s;
+
+      &:hover {
+        text-decoration-line: underline;
+        transition: O.25s;
+      }
+
+      &:active {
+        text-decoration-line: underline;
+        transition: 0s;
+      }
     }
   }
 }
