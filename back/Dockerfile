@@ -2,6 +2,8 @@ FROM node:14.7.0-alpine3.12 AS production
 
 ARG NODE_ENV
 ENV NODE_ENV $NODE_ENV
+ARG GOOGLE_API_KEY
+ENV GOOGLE_API_KEY $GOOGLE_API_KEY
 
 RUN mkdir -p /usr/src/back
 WORKDIR /usr/src/back
