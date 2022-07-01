@@ -39,13 +39,6 @@ export default Vue.extend({
         { label: "Italie" },
         { label: "France" },
         { label: "UK" },
-        { label: "France" },
-        { label: "France" },
-        { label: "France" },
-        { label: "France" },
-        { label: "France" },
-        { label: "France" },
-        { label: "France" },
       ],
     },
     buttonAction: { type: Function, default: () => {} },
@@ -59,11 +52,6 @@ export default Vue.extend({
       value: undefined,
       items: this.forcedItems,
     };
-  },
-  watch: {
-    value: function (val) {
-      console.log("Autocomplete", val);
-    },
   },
   computed: {
     computedClass: function () {
