@@ -4,17 +4,8 @@ export const state = () => ({
   // SCSS attributes
   colors,
   // App attributes
-  user: {},
   travel: [],
 });
-
-export const getters = {
-  isUserLoggedIn: function (state) {
-    const { user } = state;
-
-    return !!(user.id && user.email);
-  },
-};
 
 export const mutations = {
   addStepToTravel: function (state, step) {
@@ -45,15 +36,13 @@ export const actions = {
   nuxtServerInit: async function ({ dispatch }) {
     // TODO > Initial loading here, if needed (cf. docs if issues)
   },
-  logUserIn: async function ({ state, getters, dispatch }, email, pass) {
-    if (getters.isUserLoggedIn) await dispatch("logUserOut");
-    // TODO > Log user to DB
-  },
-  logUserOut: async function ({ state, getters }) {
-    if (!getters.isUserLoggedIn) return;
-    // TODO > Logout current user
-  },
   saveTravel: async function (state) {
-    // TODO > Send current travel to DB
+    // TODO > Send current travel to localStorage
+  },
+  loadTravel: async function (state, idx) {
+    // TODO > Load selected travel from localStorage
+  },
+  deleteTravel: async function (state, idx) {
+    // TODO > Delete selected travel from localStorage
   },
 };

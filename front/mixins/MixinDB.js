@@ -1,5 +1,7 @@
 import Vue from "vue";
 
+const TYPES = ["get", "post"];
+
 export default Vue.extend({
   data() {
     return {
@@ -18,13 +20,21 @@ export default Vue.extend({
       const { computedURL } = this;
       return `${computedURL}/${target}`;
     },
-    customQuery: async function (type, target, body = {}) {},
-    getSearchSuggestions: async function (param) {
+    queryCustom: async function (type, target, params = {}) {
+      try {
+        if (!TYPES.includes(type))
+          throw "ERR - Passed query type is incorrect.";
 
+        const query = this.computeQuery(target);
+        const method = "$" + type;
+      } catch (err) {
+        console.error(err.message);
+      }
     },
+    getSearchSuggestions: async function (param) {},
     getSearchResults: async function (param) {
       console.log("in getSearchResults", this.computedURL, param);
-      const val = await this.$axios.$get("airports")
+      const val = await this.$axios.$get("airports");
       console.log(val);
     },
   },

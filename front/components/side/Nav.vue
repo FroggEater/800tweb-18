@@ -42,19 +42,17 @@ export default Vue.extend({
           action: () => {},
         },
         {
-          label: "Maps",
-          icon: "map",
-          action: () => {},
-        },
-        {
           label: "Travels",
           icon: "compass",
           action: () => {},
         },
         {
-          label: "Logout",
-          icon: "user-x",
-          action: () => {},
+          label: "Maps",
+          icon: "map",
+          action: () => {
+            const url = "https://www.google.com/maps";
+            window.open(url, "_blank").focus();
+          },
         },
       ],
     };
