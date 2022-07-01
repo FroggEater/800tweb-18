@@ -21,13 +21,13 @@ module.exports = {
           }
         }
       );
-      let customResponse = {}
+      let customResponse = []
       data.data.forEach(flight => {
-        customResponse[flight.id] = {
+        customResponse.push({
           price: flight.price.total,
           numberOfBookableSeats: flight.numberOfBookableSeats,
           itineraries: flight.itineraries
-        }
+        })
       });
       ctx.send(customResponse);
     } catch (error) {

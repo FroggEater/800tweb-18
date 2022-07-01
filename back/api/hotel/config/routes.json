@@ -26,6 +26,14 @@
     },
     {
       "method": "POST",
+      "path": "/hotels-google",
+      "handler": "hotel.getGoogleHotelsByCity",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
       "path": "/hotels",
       "handler": "hotel.create",
       "config": {
