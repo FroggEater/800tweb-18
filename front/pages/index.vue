@@ -1,18 +1,9 @@
 <template>
   <div class="ds-app-container ds-flex-row-between ds-flex-stretch">
     <div class="ds-app-nav">
-      <SideNav height="13.25rem" left @click="(l) => handleMenuClick(l)" />
+      <SideNav height="13.25rem" left @click="() => {}" />
     </div>
-    <div class="ds-app-main ds-flex-col-start">
-      <SharedAutocomplete
-        placeholder="Search for a destination..."
-        button-text="Search"
-        :class="computedSearchBarClass"
-        @submit="(v) => handleSubmit(v)"
-        @clear="() => (isExpanded = false)"
-      />
-      <SharedWrapper :class="computedSearchContainerClass"> </SharedWrapper>
-    </div>
+    <AppSearch width="60rem" />
     <div class="ds-app-stepper">
       <SideStepper height="13.25rem" right />
     </div>
@@ -22,12 +13,9 @@
 <script>
 import Vue from "vue";
 import VueFeather from "vue-feather";
-// import { Calendar, DatePicker } from "v-calendar";
 import { MixinDB } from "@/mixins";
 
 Vue.component("feather", VueFeather);
-// Vue.component("Calendar", Calendar);
-// Vue.component("DatePicker", DatePicker);
 
 export default Vue.extend({
   mixins: [MixinDB],
@@ -51,12 +39,8 @@ export default Vue.extend({
   },
   methods: {
     handleSubmit: function (v) {
-      console.log("Submit", v);
       this.isExpanded = true;
       this.getSearchResults(v);
-    },
-    handleMenuClick: function (v) {
-      console.log("Menu", v);
     },
   },
 });
@@ -77,31 +61,6 @@ export default Vue.extend({
   &-main {
     margin-left: 2rem;
     margin-right: 2rem;
-  }
-
-  &-search {
-    &-bar {
-      width: 60rem;
-      top: calc((100% - 4rem) / 2);
-      transition: 0.5s;
-
-      &--active {
-        top: 0;
-        transition: 0.5s;
-      }
-    }
-
-    &-container {
-      width: 60rem;
-      margin-top: 100vh;
-      flex-grow: 1;
-      transition: 0.5s;
-
-      &--active {
-        margin-top: 2rem;
-        transition: 0.5s;
-      }
-    }
   }
 }
 </style>

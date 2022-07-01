@@ -8,7 +8,7 @@
       :small="small"
       :custom-value="value"
       @input="(v) => handleInput(v)"
-      @focus="() => {}"
+      @focus="() => $emit('focus')"
       @blur="() => (isExpanded = false)"
       @submit="(v) => $emit('submit', v)"
       @clear="() => handleClear()"
@@ -98,6 +98,7 @@ export default Vue.extend({
     handleSelect: function (item) {
       this.value = item.label;
       this.isExpanded = false;
+      this.$emit("select", item);
     },
     handleClear: function () {
       this.value = undefined;
