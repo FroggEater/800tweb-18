@@ -106,7 +106,7 @@ export default Vue.extend({
 
   // Colors and states
   background: $color-light;
-  border: 2px solid $color-dark-sub;
+  border: 2px solid $color-dark-lighter;
   outline: none !important;
   transition: 0.25s;
 

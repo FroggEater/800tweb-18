@@ -136,7 +136,7 @@ export default Vue.extend({
 
   // Colors and states
   background: transparent;
-  border: 2px solid $color-dark-sub;
+  border: 2px solid $color-dark-lighter;
   transition: 0.25s;
 
   &:hover {
