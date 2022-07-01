@@ -1,4 +1,6 @@
 "use strict";
+const axios = require('axios');
+var querystring = require('querystring');
 
 /**
  * Cron config that gives you an opportunity
@@ -15,11 +17,34 @@ module.exports = {
    * Simple example.
    * Every monday at 1am.
    */
-  // '0 1 * * 1': () => {
+  // '38 * * * *': () => {
   //
   // }
 
-  " 13 14 * 6 *": async () => {
+  " */25 * * * *": async () => {
+    try {
+    const data  = await axios.post('https://test.api.amadeus.com/v1/security/oauth2/token',
+      querystring.stringify({
+        grant_type: 'client_credentials',
+        client_id: 'fmiUIUSGBbU6UhZSNSr0EG9jaG30pURr',
+        client_secret: 'MuLDECeSUB0fVSGb'
+      }), {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    });
+    await strapi.services['token'].update(
+      { external_api: 'amadeus' },
+      {
+        token: data.data.access_token
+      }
+    )
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  " 46 * * * *": async () => {
     console.log("deleting...");
     //delete country
     try {

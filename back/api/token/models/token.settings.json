@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tokens",
+  "info": {
+    "name": "token",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "token": {
+      "type": "text"
+    },
+    "external_api": {
+      "type": "string"
+    }
+  }
+}

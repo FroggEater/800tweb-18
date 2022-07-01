@@ -26,6 +26,14 @@
     },
     {
       "method": "POST",
+      "path": "/flights-amadeus",
+      "handler": "flight.getFlightFromDepartureToArrival",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
       "path": "/flights",
       "handler": "flight.create",
       "config": {
