@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 services:
   front:
@@ -32,8 +32,8 @@ services:
       DATABASE_NAME: ${SQL_DATABASE}
       DATABASE_USERNAME: ${SQL_USER}
       DATABASE_PASSWORD: ${SQL_PASSWORD}
-#      AWS_SES_KEY: ${AWS_SES_KEY}
-#      AWS_SES_SECRET: ${AWS_SES_SECRET}
+    #      AWS_SES_KEY: ${AWS_SES_KEY}
+    #      AWS_SES_SECRET: ${AWS_SES_SECRET}
     ports:
       - 34002:1337
     depends_on:
