@@ -14,3 +14,7 @@ afterAll(async () => {
 it("strapi is defined", () => {
   expect(strapi).toBeDefined();
 });
+
+require("./airports");
+require("./flights");
+require("./airports");
