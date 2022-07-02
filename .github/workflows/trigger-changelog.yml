@@ -17,6 +17,7 @@ jobs:
         with:
           configuration: 'GitChangelog.json'
           outputFile: 'CHANGELOG.md'
+          fromTag: 'v0.2.1'
       - name: Commit and push changes to current branch
         run: |
           git config --global user.name "FroggEater"
