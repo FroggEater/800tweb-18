@@ -8,14 +8,14 @@
       :small="small"
       :custom-value="value"
       @input="(v) => handleInput(v)"
-      @focus="() => $emit('focus')"
+      @focus="() => handleFocus()"
       @blur="() => (isExpanded = false)"
       @submit="(v) => $emit('submit', v)"
       @clear="() => handleClear()"
     />
     <SharedWrapper :class="computedSuggestionsClass" column>
       <div
-        v-for="(item, idx) in items"
+        v-for="(item, idx) in computedItems"
         :class="computedEntryClass"
         :key="idx"
         @click.stop="() => handleSelect(item)"
@@ -33,13 +33,9 @@ import { MixinDB } from "@/mixins";
 export default Vue.extend({
   mixins: [MixinDB],
   props: {
-    forcedItems: {
+    items: {
       type: Array,
-      default: () => [
-        { label: "Italie" },
-        { label: "France" },
-        { label: "UK" },
-      ],
+      default: () => [],
     },
     buttonAction: { type: Function, default: () => {} },
     buttonText: { type: String, default: "" },
@@ -49,8 +45,7 @@ export default Vue.extend({
   data() {
     return {
       isExpanded: false,
-      value: undefined,
-      items: this.forcedItems,
+      value: "",
     };
   },
   computed: {
@@ -58,42 +53,32 @@ export default Vue.extend({
       return ["ds-autocomplete", "ds-flex-col-start", "ds-flex-stretch"];
     },
     computedSuggestionsClass: function () {
-      const { items, isExpanded } = this;
+      const { isExpanded } = this;
       const currClasses = ["ds-autocomplete-menu", "ds-text-body-small"];
 
-      return [
-        ...currClasses,
-        items.length && isExpanded && "ds-autocomplete-menu--active",
-      ];
+      return [...currClasses, isExpanded && "ds-autocomplete-menu--active"];
     },
     computedEntryClass: function () {
       return ["ds-autocomplete-menu-entry"];
     },
-    hasForcedItems: function () {
-      const { forcedItems } = this;
+    computedItems: function () {
+      const { items, value } = this;
 
-      return !!forcedItems.length;
-    },
-  },
-  methods: {
-    loadSuggestions: async function () {
-      const { value, hasForcedItems, forcedItems } = this;
-
-      const results = hasForcedItems
-        ? forcedItems
-        : await this.getSearchSuggestions(value);
-      const items = results.filter((r) => {
+      const filteredItems = items.filter((r) => {
         const currentLabel = (r.label || "").toLowerCase();
         const currentSearch = value.toLowerCase();
         return currentLabel.includes(currentSearch);
       });
 
-      this.$set(this, "items", items);
-      this.isExpanded = !!items.length;
+      return filteredItems;
     },
-    handleInput: function (val) {
-      this.loadSuggestions();
-      this.$emit("input", val);
+  },
+  methods: {
+    handleInput: function (value) {
+      const { computedItems } = this;
+
+      this.isExpanded = computedItems.length;
+      this.$emit("input", value);
     },
     handleSelect: function (item) {
       this.value = item.label;
@@ -101,9 +86,15 @@ export default Vue.extend({
       this.$emit("select", item);
     },
     handleClear: function () {
-      this.value = undefined;
+      this.value = "";
       this.isExpanded = false;
       this.$emit("clear");
+    },
+    handleFocus: function () {
+      const { computedItems } = this;
+
+      this.isExpanded = computedItems.length;
+      this.$emit("focus");
     },
   },
 });
