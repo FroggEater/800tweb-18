@@ -1,22 +1,14 @@
+const path = require('path')
+
 module.exports = {
+  testEnvironment: 'jest-environment-jsdom',
+  moduleDirectories: [
+    'node_modules',
+    path.join(__dirname, '.'),
+    'shared',
+    path.join(__dirname, 'test')
+  ],
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/$1',
-    '^~/(.*)$': '<rootDir>/$1',
-    '^vue$': 'vue/dist/vue.common.js'
+    '\\.module\\.css$': 'identity-obj-proxy',
   },
-  moduleFileExtensions: [
-    'js',
-    'vue',
-    'json'
-  ],
-  transform: {
-    '^.+\\.js$': 'babel-jest',
-    '.*\\.(vue)$': 'vue-jest'
-  },
-  collectCoverage: true,
-  collectCoverageFrom: [
-    '<rootDir>/components/**/*.vue',
-    '<rootDir>/pages/**/*.vue'
-  ],
-  testEnvironment: 'jsdom'
 }
