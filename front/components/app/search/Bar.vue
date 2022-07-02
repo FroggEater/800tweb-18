@@ -9,10 +9,12 @@
       <v-date-picker v-model="activePeriod" is-range />
     </SharedWrapper>
 
-    <SharedButton
+    <SharedDropdown
       class="mr-3"
-      :icon="isSearchingFlights ? 'cloud' : 'home'"
-      @click="() => (isSearchingFlights = !isSearchingFlights)"
+      width="6rem"
+      :value="type.label"
+      :items="types"
+      @select="(v) => setType(v)"
     />
 
     <SharedAutocomplete
@@ -20,6 +22,7 @@
       v-model="startValue"
       class="ds-search-field"
       placeholder="Starting city"
+      :items="cities"
       @focus="() => (isDatePickerExpanded = false)"
       @submit="() => handleSubmit()"
       @clear="() => handleClear('startValue')"
@@ -31,6 +34,7 @@
       v-model="endValue"
       class="ds-search-field"
       placeholder="Destination city"
+      :items="cities"
       @focus="() => (isDatePickerExpanded = false)"
       @submit="() => handleSubmit()"
       @clear="() => handleClear('endValue')"
@@ -41,11 +45,25 @@
       v-show="!isSearchingFlights"
       v-model="singleValue"
       class="ds-search-field"
-      placeholder="Destination city"
+      placeholder="Target city"
+      :items="cities"
       @focus="() => (isDatePickerExpanded = false)"
       @submit="() => handleSubmit()"
       @clear="() => handleClear('singleValue')"
       @select="(i) => (singleValue = i.label)"
+    />
+
+    <SharedInput
+      class="mr-3"
+      placeholder="People"
+      width="7rem"
+      number
+      hide-clear
+      :custom-value="peopleCount"
+      @input="(v) => peopleCount = v"
+      @focus="() => (isDatePickerExpanded = false)"
+      @submit="() => handleSubmit()"
+      @clear="() => handleClear('peopleCount')"
     />
 
     <SharedButton positive @click="() => handleSubmit()"> Search </SharedButton>
@@ -54,8 +72,7 @@
 
 <script>
 import Vue from "vue";
-import { mapGetters, mapMutations } from "vuex";
-import moment from "moment";
+import { mapGetters, mapState, mapMutations } from "vuex";
 
 export default Vue.extend({
   props: {
@@ -64,10 +81,10 @@ export default Vue.extend({
   data() {
     return {
       isDatePickerExpanded: false,
-      isSearchingFlights: false,
       startValue: "",
       endValue: "",
       singleValue: "",
+      peopleCount: 1,
       activePeriod: { start: new Date(), end: new Date() },
     };
   },
@@ -86,12 +103,16 @@ export default Vue.extend({
 
       return { ...(width && { width }) };
     },
-    ...mapGetters(["period"]),
+    isSearchingFlights: function () {
+      const { type } = this;
+
+      return type.value === "flight";
+    },
+    ...mapGetters(["period", "typeLabel"]),
+    ...mapState(["cities", "types", "type"]),
   },
   created() {
     const { period } = this;
-    console.log({ period });
-
     this.activePeriod = period;
   },
   methods: {
@@ -112,7 +133,6 @@ export default Vue.extend({
         isSearchingFlights,
       } = this;
 
-      console.log({ startValue, endValue, singleValue, activePeriod });
       this.isDatePickerExpanded = false;
       this.setPeriod(activePeriod);
       this.$emit("submit", {
@@ -123,7 +143,7 @@ export default Vue.extend({
         activePeriod,
       });
     },
-    ...mapMutations(["setPeriod"]),
+    ...mapMutations(["setPeriod", "setType"]),
   },
 });
 </script>

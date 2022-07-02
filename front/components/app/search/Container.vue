@@ -5,14 +5,13 @@
       :key="idx"
       @click.stop="() => $emit('click', idx)"
     >
-      {{ item }}
+      <AppSearchResult v-bind="item" />
     </div>
   </SharedWrapper>
 </template>
 
 <script>
 import Vue from "vue";
-import { mapState } from "vuex";
 
 export default Vue.extend({
   props: {

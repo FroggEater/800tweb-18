@@ -1,5 +1,9 @@
 <template>
-  <div :class="computedClass" @click.stop="() => handleClick()">
+  <div
+    :class="computedClass"
+    :style="computedStyle"
+    @click.stop="() => handleClick()"
+  >
     <feather
       v-if="icon"
       :class="{
@@ -23,6 +27,7 @@ export default Vue.extend({
   props: {
     action: { type: Function, default: () => {} },
     icon: { type: String, default: "" },
+    width: { type: String, default: "" },
     expanded: { type: Boolean, default: true },
     small: Boolean,
     link: Boolean,
@@ -42,11 +47,16 @@ export default Vue.extend({
         collapse,
         hideSlot,
         expanded,
+        icon,
         hasContentInSlot,
       } = this;
       const currClasses = [
         "ds-button",
-        collapse ? "ds-flex-row-between" : "ds-flex-row-start",
+        collapse
+          ? "ds-flex-row-between"
+          : icon
+          ? "ds-flex-row-start"
+          : "ds-flex-row-center",
       ];
       const textClass = small ? "ds-text-content-small" : "ds-text-content";
 
@@ -66,6 +76,11 @@ export default Vue.extend({
       const { hideSlot } = this;
 
       return ["ds-button-label", hideSlot && "ds-button-label--hidden"];
+    },
+    computedStyle: function () {
+      const { width } = this;
+
+      return { ...(width && { width }) };
     },
     hasContentInSlot: function () {
       return (this.$slots.default || []).some(

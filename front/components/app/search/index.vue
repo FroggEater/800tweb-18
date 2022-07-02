@@ -6,12 +6,17 @@
       @submit="(v) => handleSubmit(v)"
       @clear="() => (isExpanded = false)"
     />
-    <AppSearchContainer :class="computedSearchContainerClass" :width="width" />
+    <AppSearchContainer
+      :class="computedSearchContainerClass"
+      :width="width"
+      :items="type !== 'flight' ? stayItems : flightItems"
+    />
   </div>
 </template>
 
 <script>
 import Vue from "vue";
+import {mapGetters} from "vuex";
 import { MixinDB } from "@/mixins";
 
 export default Vue.extend({
@@ -22,6 +27,8 @@ export default Vue.extend({
   data() {
     return {
       isExpanded: false,
+      stayItems: [],
+      flightItems: [],
     };
   },
   computed: {
@@ -43,13 +50,14 @@ export default Vue.extend({
 
       return { ...(width && { width }) };
     },
+    ...mapGetters(["type"]),
   },
   methods: {
     handleSubmit: function (value) {
-      const {startValue, endValue, period} = value;
+      const { type } = this;
 
       this.isExpanded = true;
-      this.getSearchResults(startValue);
+      this.getSearchResults({ value, type });
     },
   },
 });
