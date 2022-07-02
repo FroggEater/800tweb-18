@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "museums",
+  "info": {
+    "name": "Museum"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "longitude": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "string"
+    }
+  }
+}
