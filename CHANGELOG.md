@@ -1,10 +1,12 @@
 # 📎 CHANGELOG
 
 ```
-v0.2.1 > v0.12.0
+v0.2.1 > v0.12.1
 ```
 
 ## 🚀 FEATURES
+
+#### **[PR#18](https://github.com/FroggEater/800tweb-18/pull/18) | ERT-64 | Fix remaining issues**
 
 #### **[PR#14](https://github.com/FroggEater/800tweb-18/pull/14) | ERT-56 | Complete search functionality**
 
