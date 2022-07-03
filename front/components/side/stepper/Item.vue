@@ -1,12 +1,11 @@
 <template>
   <div :class="computedClass" @click.stop="() => $emit('click')">
-    <feather class="mr-2" size="28px" :type="type" />
+    <feather class="mr-2" size="28px" :type="icon" />
     <div :class="computedInfoClass">
-      <div>{{ name }}</div>
-      <div>{{ city }}, {{ country }}</div>
+      <div>{{ item.name }}</div>
+      <div>{{ item.address }}</div>
       <div :class="computedSubInfoClass">
-        <div>{{ time }}</div>
-        <div>{{ date }}</div>
+        <div>{{ item.rating }}</div>
       </div>
     </div>
   </div>
@@ -17,12 +16,9 @@ import Vue from "vue";
 
 export default Vue.extend({
   props: {
-    type: { type: String, default: "x" },
-    date: { type: String, default: "12/12" },
-    time: { type: String, default: "12:00" },
-    name: { type: String, default: "No name..." },
-    city: { type: String, default: "No city..." },
-    country: { type: String, default: "No country..." },
+    item: { type: Object, default: () => {} },
+    type: { type: String, default: "" },
+    icon: { type: String, default: "x" },
     expanded: { type: Boolean, default: true },
     separator: Boolean,
     hideInfo: Boolean,

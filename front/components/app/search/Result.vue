@@ -1,17 +1,21 @@
 <template>
   <SharedWrapper stretch :class="computedClass" :width="width">
-    <iframe v-if="computedIFrameURL" loading="lazy" :src="computedIFrameURL" />
+    <iframe
+      v-if="computedIFrameURL && !isFlight"
+      loading="lazy"
+      :src="computedIFrameURL"
+    />
     <div :class="computedContentClass">
       <div class="ds-flex-row-between ds-text-content">
-        <div>{{ name }}</div>
+        <div>{{ computedHeader }}</div>
         <SharedButton icon="plus" small positive @click="() => handleSave()" />
       </div>
 
       <div class="ds-flex-row-between ds-text-body mt-3">
-        <div>{{ address }}</div>
+        <div>{{ computedSubInfo }}</div>
         <div class="ds-flex-row-end">
-          <div>{{ rating }}</div>
-          <feather class="mx-1" type="star" />
+          <div>{{ computedExtraInfo }}</div>
+          <feather class="mx-1" :type="isFlight ? 'users' : 'star'" />
         </div>
       </div>
     </div>
@@ -25,11 +29,18 @@ import { mapState, mapGetters, mapMutations } from "vuex";
 export default Vue.extend({
   props: {
     item: { type: Object, default: () => {} },
-    location: { type: Object, default: () => {} },
     width: { type: String, default: "" },
+    // Google
     name: { type: String, default: "" },
     address: { type: String, default: "" },
     rating: { type: Number, default: 0 },
+    // Amadeus
+    itineraries: { type: Array, default: () => [] },
+    from: { type: String, default: "" },
+    to: { type: String, default: "" },
+    price: { type: String, default: "" },
+    count: { type: [Number, String], default: 1 },
+    numberOfBookableSeats: { type: Number, default: 1 },
   },
   computed: {
     computedClass: function () {
@@ -51,13 +62,51 @@ export default Vue.extend({
       return process.env.VUE_APP_GOOGLE_API_KEY;
     },
     computedIFrameURL: function () {
-      const {computedIFrameKey, address} = this;
+      const { computedIFrameKey, address } = this;
       if (!computedIFrameKey) return;
 
       const queryOne = "https://www.google.com/maps/embed/v1/search?q=";
-      const queryTwo = "&key=" + computedIFrameKey; 
+      const queryTwo = "&key=" + computedIFrameKey;
       const processedAddress = address.split(" ").join("+");
       return queryOne + processedAddress + queryTwo;
+    },
+    computedHeader: function () {
+      const { from, to, name, isFlight } = this;
+      return isFlight ? `${from} to ${to}` : name;
+    },
+    computedSubInfo: function () {
+      const { itineraries, address, isFlight } = this;
+      const [itinerary] = itineraries;
+      const { segments = [] } = itinerary || {};
+      const stops = Math.max(segments.length - 1, 0);
+
+      const flightTime = segments
+        .reduce(
+          (acc, curr) => {
+            const duration = curr.duration.slice(2, -1).split("H");
+            const [hours = 0, minutes = 0] = duration;
+
+            const newHours = acc[0] + +hours;
+            const newMinutes = acc[1] + +minutes;
+
+            return [newHours + Math.trunc(newMinutes / 60), newMinutes % 60];
+          },
+          [0, 0]
+        )
+        .map((num, idx) =>
+          idx === 0 ? (num + "").padStart(2, "0") : (num + "").padEnd(2, "0")
+        )
+        .join(":");
+
+      return isFlight ? `${flightTime} (${stops}X)` : address;
+    },
+    computedExtraInfo: function () {
+      const { rating, price, count, isFlight } = this;
+      return isFlight ? `$${price} for ${count}` : rating;
+    },
+    isFlight: function () {
+      const { itineraries } = this;
+      return itineraries.length;
     },
     isSaved: function () {
       const { name, address, travel } = this;

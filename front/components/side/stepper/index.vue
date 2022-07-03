@@ -7,17 +7,33 @@
     :maximize="isMaximized"
     @hover="(h) => handleMouseHover(h)"
   >
-    <SharedButton
-      class="ds-stepper-button-maximize"
-      positive
-      collapse
-      :icon="isMaximized ? 'minimize-2' : 'maximize-2'"
-      :expanded="isExpanded"
-      :hide-slot="!isExpanded"
-      @click="() => (isMaximized = !isMaximized)"
-    >
-      {{ isMaximized ? "Minimize" : "Maximize" }}
-    </SharedButton>
+    <div :class="computedControlClass">
+      <SharedButton
+        small
+        :icon="isMaximized ? 'minimize-2' : 'maximize-2'"
+        :expanded="isExpanded"
+        :hide-slot="!isExpanded"
+        @click="() => (isMaximized = !isMaximized)"
+      />
+
+      <SharedButton
+        small
+        positive
+        icon="download"
+        :expanded="isExpanded"
+        :hide-slot="!isExpanded"
+        @click="() => handleDownload()"
+      />
+
+      <SharedButton
+        small
+        icon="x"
+        negative
+        :expanded="isExpanded"
+        :hide-slot="!isExpanded"
+        @click="() => clearTravel()"
+      />
+    </div>
 
     <SideStepperItem
       v-for="(step, idx) in travel"
@@ -28,18 +44,6 @@
       :expanded="isExpanded"
       @click="() => removeStepFromTravel(idx)"
     />
-
-    <SharedButton
-      class="ds-stepper-button-minimize"
-      icon="x"
-      negative
-      collapse
-      :expanded="isExpanded"
-      :hide-slot="!isExpanded"
-      @click="() => clearTravel()"
-    >
-      Clear
-    </SharedButton>
   </SharedCollapse>
 </template>
 
@@ -69,46 +73,31 @@ export default Vue.extend({
         isMaximized && "ds-stepper--focus",
       ];
     },
+    computedControlClass: function () {
+      return ["ds-stepper-control", "ds-flex-row-between"];
+    },
     ...mapState(["travel"]),
   },
-  created() {
-    // TODO > Remove, debug only
-    this._populateStepper(10);
-  },
   methods: {
-    _populateStepper: function (length) {
-      const types = ["anchor", "send"];
-      this.clearTravel();
-
-      [...new Array(length)].forEach((_v, idx) => {
-        const rdTypeIdx = Math.round(Math.random());
-        const rdTime = Math.round(Math.random() * 23);
-        const rdDay = Math.round(Math.random() * 28);
-        const rdMonth = Math.round(Math.random() * 12);
-
-        const newStep = {
-          type: types[rdTypeIdx],
-          date:
-            (rdDay + "").padStart(2, "0") +
-            "/" +
-            (rdMonth + "").padStart(2, "0"),
-          time: (rdTime + "").padStart(2, "0") + ":00",
-          name: "Here & There - " + idx,
-          city: "Paris",
-          country: "France",
-        };
-
-        this.addStepToTravel(newStep);
-      });
-    },
     handleMouseHover: function (hover) {
       const { isExpanded } = this;
 
       if (hover !== isExpanded) this.isExpanded = hover;
       this.$emit("hover", this.isExpanded);
     },
+    handleDownload: function () {
+      console.log("DOWNLOAD");
+    },
     ...mapMutations(["addStepToTravel", "removeStepFromTravel", "clearTravel"]),
     ...mapActions(["saveTravel"]),
   },
 });
 </script>
+
+<style scoped lang="scss">
+.ds-stepper {
+  &-control {
+    min-width: 13.75rem;
+  }
+}
+</style>

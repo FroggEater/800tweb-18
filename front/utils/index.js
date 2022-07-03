@@ -2,22 +2,27 @@ const stepTypes = [
   {
     value: "hotel",
     label: "Hotels",
+    icon: "home",
   },
   {
     value: "flight",
     label: "Flight",
+    icon: "wind",
   },
   {
     value: "restaurant",
     label: "Food",
+    icon: "coffee",
   },
   {
     value: "bar",
     label: "Drinks",
+    icon: "coffee",
   },
   {
     value: "museum",
     label: "Culture",
+    icon: "book",
   },
 ];
 

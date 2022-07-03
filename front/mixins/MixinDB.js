@@ -1,7 +1,7 @@
 import Vue from "vue";
 import moment from "moment";
 
-import JSONCities from '@/static/cities.json';
+import JSONCities from "@/static/cities.json";
 
 export default Vue.extend({
   methods: {
@@ -57,7 +57,10 @@ export default Vue.extend({
 
       const results = await Promise.all(promises);
       return results.reduce((acc, curr) => {
-        return [...curr, ...acc];
+        return [
+          ...acc,
+          ...curr.map((flight) => ({ ...flight, from, to, count })),
+        ];
       }, []);
     },
     getHotels: async function (city) {
