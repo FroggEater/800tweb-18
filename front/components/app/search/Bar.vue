@@ -1,14 +1,5 @@
 <template>
   <div class="ds-flex-row-start" :style="computedStyle">
-    <SharedButton
-      class="mr-3"
-      icon="calendar"
-      @click="() => (isDatePickerExpanded = !isDatePickerExpanded)"
-    />
-    <SharedWrapper column :class="computedDatePickerClass">
-      <v-date-picker v-model="activePeriod" is-range />
-    </SharedWrapper>
-
     <SharedDropdown
       class="mr-3"
       width="6rem"
@@ -16,6 +7,16 @@
       :items="types"
       @select="(v) => setType(v)"
     />
+
+    <SharedButton
+      v-show="isSearchingFlights"
+      class="mr-3"
+      icon="calendar"
+      @click="() => (isDatePickerExpanded = !isDatePickerExpanded)"
+    />
+    <SharedWrapper column :class="computedDatePickerClass">
+      <v-date-picker v-model="activePeriod" is-range />
+    </SharedWrapper>
 
     <SharedAutocomplete
       v-show="isSearchingFlights"
@@ -54,6 +55,7 @@
     />
 
     <SharedInput
+      v-show="isSearchingFlights"
       class="mr-3"
       placeholder="People"
       width="7rem"

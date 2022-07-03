@@ -16,18 +16,22 @@ export default Vue.extend({
   props: {
     height: { type: String, default: "" },
     width: { type: String, default: "" },
+    stretch: Boolean,
     column: Boolean,
     nowrap: Boolean,
     noscroll: Boolean,
   },
   computed: {
     computedClass: function () {
-      const { column, noscroll, nowrap } = this;
+      const { column, noscroll, nowrap, stretch } = this;
       const currClasses = ["ds-wrapper", "ds-flex-start"];
+      const flexClass = `ds-flex-${column ? "col" : "row"}-${
+        stretch ? "between" : "start"
+      }`;
 
       return [
         ...currClasses,
-        column ? "ds-flex-col-start" : "ds-flex-row-start",
+        flexClass,
         nowrap && "ds-wrapper-nowrap",
         noscroll && "ds-wrapper-noscroll",
       ];

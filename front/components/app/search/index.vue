@@ -9,7 +9,7 @@
     <AppSearchContainer
       :class="computedSearchContainerClass"
       :width="width"
-      :items="type !== 'flight' ? stayItems : flightItems"
+      :items="items"
     />
   </div>
 </template>
@@ -27,8 +27,7 @@ export default Vue.extend({
   data() {
     return {
       isExpanded: false,
-      stayItems: [],
-      flightItems: [],
+      items: [],
     };
   },
   computed: {
@@ -53,11 +52,16 @@ export default Vue.extend({
     ...mapGetters(["type"]),
   },
   methods: {
-    handleSubmit: function (value) {
+    loadResults: async function (value) {
       const { type } = this;
 
+      const results = await this.getSearchResults({ value, type });
+      console.log("loadResults", results);
+      this.items = results;
+    },
+    handleSubmit: function (value) {
+      this.loadResults(value);
       this.isExpanded = true;
-      this.getSearchResults({ value, type });
     },
   },
 });

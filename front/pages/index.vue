@@ -37,12 +37,6 @@ export default Vue.extend({
       ];
     },
   },
-  methods: {
-    handleSubmit: function (v) {
-      this.isExpanded = true;
-      this.getSearchResults(v);
-    },
-  },
 });
 </script>
 

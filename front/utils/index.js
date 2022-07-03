@@ -1,7 +1,7 @@
 const stepTypes = [
   {
     value: "hotel",
-    label: "Hotel",
+    label: "Hotels",
   },
   {
     value: "flight",
@@ -12,8 +12,12 @@ const stepTypes = [
     label: "Food",
   },
   {
-    value: "activity",
-    label: "Other",
+    value: "bar",
+    label: "Drinks",
+  },
+  {
+    value: "museum",
+    label: "Culture",
   },
 ];
 

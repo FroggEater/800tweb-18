@@ -10,7 +10,7 @@
       @input="(v) => handleInput(v)"
       @focus="() => handleFocus()"
       @blur="() => (isExpanded = false)"
-      @submit="(v) => $emit('submit', v)"
+      @submit="(v) => handleSubmit(v)"
       @clear="() => handleClear()"
     />
     <SharedWrapper :class="computedSuggestionsClass" column>
@@ -89,6 +89,10 @@ export default Vue.extend({
       this.value = "";
       this.isExpanded = false;
       this.$emit("clear");
+    },
+    handleSubmit: function (value) {
+      this.isExpanded = false;
+      this.$emit("submit", value);
     },
     handleFocus: function () {
       const { computedItems } = this;
