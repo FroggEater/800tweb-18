@@ -21,17 +21,19 @@ export default Vue.extend({
           results = await this.getFlights(from, to, count, period);
           break;
         case "hotel":
-          results = await this.getHotels(city);
+          results = await this.getHotels(city, period[0]);
           break;
         case "restaurant":
-          results = await this.getRestaurants(city);
+          results = await this.getRestaurants(city, period[0]);
           break;
         case "bar":
+          results = await this.getBars(city, period[0]);
+          break;
         case "museum":
+          results = await this.getMuseums(city, period[0]);
           break;
       }
 
-      console.log("getSearchResults", { results });
       return results;
     },
     getFlights: async function (from, to, count, period) {
@@ -41,29 +43,24 @@ export default Vue.extend({
         adults: count + "",
       };
 
-      console.log("flights", { body, period });
-
       let date = period[0];
-      const promises = new Array();
+      let results = [];
       while (date <= period[1]) {
-        const promise = this.$axios
+        const subResults = await this.$axios
           .$post("flights-amadeus", { ...body, date })
           .catch((err) => {
             if (err.response.status === 404) return [];
           });
-        promises.push(promise);
+        results = [
+          ...results,
+          ...subResults.map((flight) => ({ ...flight, from, to, count, date })),
+        ];
         date = moment(date).add(1, "days").format("YYYY-MM-DD");
       }
 
-      const results = await Promise.all(promises);
-      return results.reduce((acc, curr) => {
-        return [
-          ...acc,
-          ...curr.map((flight) => ({ ...flight, from, to, count })),
-        ];
-      }, []);
+      return results;
     },
-    getHotels: async function (city) {
+    getHotels: async function (city, date) {
       const body = { city };
 
       const results = await this.$axios
@@ -71,9 +68,9 @@ export default Vue.extend({
         .catch((err) => {
           if (err.response.status === 404) return [];
         });
-      return results;
+      return results.map((item) => ({ ...item, date }));
     },
-    getRestaurants: async function (city) {
+    getRestaurants: async function (city, date) {
       const body = { city };
 
       const results = await this.$axios
@@ -81,9 +78,9 @@ export default Vue.extend({
         .catch((err) => {
           if (err.response.status === 404) return [];
         });
-      return results;
+      return results.map((item) => ({ ...item, date }));
     },
-    getBars: async function (city) {
+    getBars: async function (city, date) {
       const body = { city };
 
       const results = await this.$axios
@@ -91,9 +88,9 @@ export default Vue.extend({
         .catch((err) => {
           if (err.response.status === 404) return [];
         });
-      return results;
+      return results.map((item) => ({ ...item, date }));
     },
-    getMuseums: async function (city) {
+    getMuseums: async function (city, date) {
       const body = { city };
 
       const results = await this.$axios
@@ -101,7 +98,7 @@ export default Vue.extend({
         .catch((err) => {
           if (err.response.status === 404) return [];
         });
-      return results;
+      return results.map((item) => ({ ...item, date }));
     },
   },
 });

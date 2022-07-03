@@ -24,7 +24,7 @@
 
 <script>
 import Vue from "vue";
-import { mapState, mapGetters, mapMutations } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 
 export default Vue.extend({
   props: {
@@ -75,9 +75,9 @@ export default Vue.extend({
       return isFlight ? `${from} to ${to}` : name;
     },
     computedSubInfo: function () {
-      const { itineraries, address, isFlight } = this;
-      const [itinerary] = itineraries;
-      const { segments = [] } = itinerary || {};
+      const { itineraries = [], address, isFlight } = this;
+      const [itinerary = {}] = itineraries;
+      const { segments = [] } = itinerary;
       const stops = Math.max(segments.length - 1, 0);
 
       const flightTime = segments
@@ -128,7 +128,7 @@ export default Vue.extend({
         item,
       });
     },
-    ...mapMutations(["addStepToTravel", "removeStepFromTravel"]),
+    ...mapActions(["addStepToTravel", "removeStepFromTravel"]),
   },
 });
 </script>

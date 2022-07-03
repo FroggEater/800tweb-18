@@ -5,6 +5,7 @@
     :noscroll="noscroll"
     :left="left"
     :right="right"
+    :force-expanded="forceExpanded"
     @hover="(h) => handleMouseHover(h)"
   >
     <SharedButton
@@ -24,6 +25,7 @@
 
 <script>
 import Vue from "vue";
+import { navLinks } from "@/utils";
 
 export default Vue.extend({
   props: {
@@ -31,30 +33,12 @@ export default Vue.extend({
     noscroll: Boolean,
     left: Boolean,
     right: Boolean,
+    forceExpanded: Boolean,
   },
   data() {
     return {
       isExpanded: false,
-      links: [
-        {
-          label: "Home",
-          icon: "home",
-          action: () => {},
-        },
-        {
-          label: "Travels",
-          icon: "compass",
-          action: () => {},
-        },
-        {
-          label: "Maps",
-          icon: "map",
-          action: () => {
-            const url = "https://www.google.com/maps";
-            window.open(url, "_blank").focus();
-          },
-        },
-      ],
+      links: navLinks,
     };
   },
   computed: {
@@ -73,7 +57,7 @@ export default Vue.extend({
     },
     handleClick: function (link) {
       link.action();
-      this.$emit("click", link);
+      this.$emit("click", link.id);
     },
   },
 });
