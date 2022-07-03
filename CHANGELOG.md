@@ -1,10 +1,12 @@
 # 📎 CHANGELOG
 
 ```
-v0.2.1 > v0.9.5
+v0.2.1 > v0.12.0
 ```
 
 ## 🚀 FEATURES
+
+#### **[PR#14](https://github.com/FroggEater/800tweb-18/pull/14) | ERT-56 | Complete search functionality**
 
 #### **[PR#13](https://github.com/FroggEater/800tweb-18/pull/13) | ERT-58 | Get google restaurants**
 
