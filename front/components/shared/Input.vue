@@ -38,7 +38,7 @@ import Vue from "vue";
 
 export default Vue.extend({
   props: {
-    customValue: { type: String, default: "" },
+    customValue: { type: [String, Number], default: "" },
     buttonAction: { type: Function, default: () => {} },
     buttonText: { type: String, default: "" },
     placeholder: { type: String, default: "" },
