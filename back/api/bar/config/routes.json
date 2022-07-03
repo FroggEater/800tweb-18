@@ -26,6 +26,14 @@
     },
     {
       "method": "POST",
+      "path": "/bars-google",
+      "handler": "bar.getGoogleBarsByCity",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
       "path": "/bars",
       "handler": "bar.create",
       "config": {
