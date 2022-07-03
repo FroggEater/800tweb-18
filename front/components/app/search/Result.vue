@@ -68,7 +68,7 @@ export default Vue.extend({
       );
     },
     ...mapState(["travel"]),
-    ...mapGetters(["period", "type"]),
+    ...mapGetters(["type"]),
   },
   methods: {
     handleSave: function () {

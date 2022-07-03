@@ -1,4 +1,7 @@
 import Vue from "vue";
+import moment from "moment";
+
+import JSONCities from '@/static/cities.json';
 
 export default Vue.extend({
   methods: {
@@ -8,7 +11,7 @@ export default Vue.extend({
         startValue: from,
         endValue: to,
         singleValue: city,
-        count,
+        peopleCount: count,
         period,
       } = value;
 
@@ -33,15 +36,22 @@ export default Vue.extend({
     },
     getFlights: async function (from, to, count, period) {
       const body = {
-        departure: from,
-        arrival: to,
+        departure: JSONCities[from],
+        arrival: JSONCities[to],
         adults: count + "",
       };
+
+      console.log("flights", { body, period });
 
       let date = period[0];
       const promises = new Array();
       while (date <= period[1]) {
-        promises.push(this.$axios.$post("flights-amadeus", { ...body, date }));
+        const promise = this.$axios
+          .$post("flights-amadeus", { ...body, date })
+          .catch((err) => {
+            if (err.response.status === 404) return [];
+          });
+        promises.push(promise);
         date = moment(date).add(1, "days").format("YYYY-MM-DD");
       }
 
