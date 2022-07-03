@@ -49,7 +49,7 @@ export default Vue.extend({
         const subResults = await this.$axios
           .$post("flights-amadeus", { ...body, date })
           .catch((err) => {
-            if (err.response.status === 404) return [];
+            return [];
           });
         results = [
           ...results,
@@ -66,7 +66,7 @@ export default Vue.extend({
       const results = await this.$axios
         .$post("hotels-google", body)
         .catch((err) => {
-          if (err.response.status === 404) return [];
+          return [];
         });
       return results.map((item) => ({ ...item, date }));
     },
@@ -76,7 +76,7 @@ export default Vue.extend({
       const results = await this.$axios
         .$post("restaurants-google", body)
         .catch((err) => {
-          if (err.response.status === 404) return [];
+          return [];
         });
       return results.map((item) => ({ ...item, date }));
     },
@@ -86,7 +86,7 @@ export default Vue.extend({
       const results = await this.$axios
         .$post("bars-google", body)
         .catch((err) => {
-          if (err.response.status === 404) return [];
+          return [];
         });
       return results.map((item) => ({ ...item, date }));
     },
@@ -96,7 +96,7 @@ export default Vue.extend({
       const results = await this.$axios
         .$post("museums-google", body)
         .catch((err) => {
-          if (err.response.status === 404) return [];
+          return [];
         });
       return results.map((item) => ({ ...item, date }));
     },

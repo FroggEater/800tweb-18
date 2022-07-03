@@ -12,7 +12,7 @@ const stepTypes = [
   {
     value: "restaurant",
     label: "Food",
-    icon: "coffee",
+    icon: "columns",
   },
   {
     value: "bar",
