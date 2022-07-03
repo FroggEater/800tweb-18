@@ -8,7 +8,7 @@ export const state = () => ({
   // SCSS attributes
   colors,
   // App attributes
-  period: [moment().format("YYYY-MM-DD"), moment().format("YYYY-MM-DD")],
+  rawPeriod: [moment().format("YYYY-MM-DD"), moment().format("YYYY-MM-DD")],
   travel: [],
   cities: [],
   types: [],
@@ -17,7 +17,7 @@ export const state = () => ({
 
 export const getters = {
   period: function (state) {
-    const [start, end] = state.period;
+    const [start, end] = state.rawPeriod;
     return { start: new Date(start), end: new Date(end) };
   },
   type: function (state) {
@@ -68,20 +68,20 @@ export const mutations = {
   setPeriod: function (state, { start, end }) {
     const startDate = moment(start).format("YYYY-MM-DD");
     const endDate = moment(end || start).format("YYYY-MM-DD");
-    state.period = [startDate, endDate];
+    state.rawPeriod = [startDate, endDate];
   },
   setStartDate: function (state, date) {
     const startDate = moment(date).format("YYYY-MM-DD");
-    state.period[0] = startDate;
+    state.rawPeriod[0] = startDate;
   },
   setEndDate: function (state, date) {
     const endDate = moment(date).format("YYYY-MM-DD");
-    if (!state.period[0]) state.period[0] = endDate;
-    state.period[1] = endDate;
+    if (!state.rawPeriod[0]) state.rawPeriod[0] = endDate;
+    state.rawPeriod[1] = endDate;
   },
   clearPeriod: function (state) {
     const defaultDate = moment().format("YYYY-MM-DD");
-    state.period = [defaultDate, defaultDate];
+    state.rawPeriod = [defaultDate, defaultDate];
   },
   setCities: function (state, cities) {
     state.cities = cities;

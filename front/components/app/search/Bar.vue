@@ -111,7 +111,7 @@ export default Vue.extend({
       return type.value === "flight";
     },
     ...mapGetters(["period", "typeLabel"]),
-    ...mapState(["cities", "types", "type"]),
+    ...mapState(["cities", "types", "type", "rawPeriod"]),
   },
   created() {
     const { period } = this;
@@ -132,6 +132,7 @@ export default Vue.extend({
         endValue,
         singleValue,
         activePeriod,
+        peopleCount,
         isSearchingFlights,
       } = this;
 
@@ -141,8 +142,9 @@ export default Vue.extend({
         startValue,
         endValue,
         singleValue,
+        peopleCount,
         isSearchingFlights,
-        activePeriod,
+        period: this.rawPeriod,
       });
     },
     ...mapMutations(["setPeriod", "setType"]),
