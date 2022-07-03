@@ -1,41 +1,104 @@
 import Vue from "vue";
+import moment from "moment";
 
-const TYPES = ["get", "post"];
+import JSONCities from "@/static/cities.json";
 
 export default Vue.extend({
-  data() {
-    return {
-      hostName: "localhost",
-      hostPort: 34002,
-    };
-  },
-  computed: {
-    computedURL: function () {
-      const { hostName, hostPort } = this;
-      return `http://${hostName}:${hostPort}/`;
-    },
-  },
   methods: {
-    computeQuery: function (target) {
-      const { computedURL } = this;
-      return `${computedURL}/${target}`;
-    },
-    queryCustom: async function (type, target, params = {}) {
-      try {
-        if (!TYPES.includes(type))
-          throw "ERR - Passed query type is incorrect.";
+    getSearchResults: async function (params) {
+      const { value, type } = params;
+      const {
+        startValue: from,
+        endValue: to,
+        singleValue: city,
+        peopleCount: count,
+        period,
+      } = value;
 
-        const query = this.computeQuery(target);
-        const method = "$" + type;
-      } catch (err) {
-        console.error(err.message);
+      let results;
+      switch (type) {
+        case "flight":
+          results = await this.getFlights(from, to, count, period);
+          break;
+        case "hotel":
+          results = await this.getHotels(city, period[0]);
+          break;
+        case "restaurant":
+          results = await this.getRestaurants(city, period[0]);
+          break;
+        case "bar":
+          results = await this.getBars(city, period[0]);
+          break;
+        case "museum":
+          results = await this.getMuseums(city, period[0]);
+          break;
       }
+
+      return results;
     },
-    getSearchSuggestions: async function (param) {},
-    getSearchResults: async function (param) {
-      console.log("in getSearchResults", this.computedURL, param);
-      const val = await this.$axios.$get("airports");
-      console.log(val);
+    getFlights: async function (from, to, count, period) {
+      const body = {
+        departure: JSONCities[from],
+        arrival: JSONCities[to],
+        adults: count + "",
+      };
+
+      let date = period[0];
+      let results = [];
+      while (date <= period[1]) {
+        const subResults = await this.$axios
+          .$post("flights-amadeus", { ...body, date })
+          .catch((err) => {
+            return [];
+          });
+        results = [
+          ...results,
+          ...subResults.map((flight) => ({ ...flight, from, to, count, date })),
+        ];
+        date = moment(date).add(1, "days").format("YYYY-MM-DD");
+      }
+
+      return results;
+    },
+    getHotels: async function (city, date) {
+      const body = { city };
+
+      const results = await this.$axios
+        .$post("hotels-google", body)
+        .catch((err) => {
+          return [];
+        });
+      return results.map((item) => ({ ...item, date }));
+    },
+    getRestaurants: async function (city, date) {
+      const body = { city };
+
+      const results = await this.$axios
+        .$post("restaurants-google", body)
+        .catch((err) => {
+          return [];
+        });
+      return results.map((item) => ({ ...item, date }));
+    },
+    getBars: async function (city, date) {
+      const body = { city };
+
+      const results = await this.$axios
+        .$post("bars-google", body)
+        .catch((err) => {
+          return [];
+        });
+      return results.map((item) => ({ ...item, date }));
+    },
+    getMuseums: async function (city, date) {
+      const body = { city };
+
+      const results = await this.$axios
+        .$post("museums-google", body)
+        .catch((err) => {
+          return [];
+        });
+      return results.map((item) => ({ ...item, date }));
     },
   },
 });

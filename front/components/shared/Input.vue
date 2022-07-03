@@ -1,10 +1,11 @@
 <template>
   <div class="ds-input-wrapper">
     <input
-      type="text"
+      :type="number ? 'number' : 'text'"
       :value="customValue"
       :class="computedClass"
       :placeholder="placeholder"
+      :style="computedStyle"
       @keyup="(e) => handleKeyUp(e, customValue)"
       @input="(e) => handleInput(e)"
       @focus="() => $emit('focus')"
@@ -13,7 +14,7 @@
     />
     <div :class="computedButtonsClass">
       <SharedButton
-        v-if="customValue"
+        v-if="customValue && !hideClear"
         icon="x"
         negative
         :small="small"
@@ -37,11 +38,14 @@ import Vue from "vue";
 
 export default Vue.extend({
   props: {
-    customValue: { type: String, default: "" },
+    customValue: { type: [String, Number], default: "" },
     buttonAction: { type: Function, default: () => {} },
     buttonText: { type: String, default: "" },
     placeholder: { type: String, default: "" },
+    width: { type: String, default: "" },
     small: Boolean,
+    number: Boolean,
+    hideClear: Boolean,
   },
   computed: {
     computedClass: function () {
@@ -56,6 +60,11 @@ export default Vue.extend({
       const currClasses = ["ds-input-buttons", "ds-flex-row-end"];
 
       return [...currClasses, small && "ds-input-buttons-small"];
+    },
+    computedStyle: function () {
+      const { width } = this;
+
+      return { ...(width && { width }) };
     },
   },
   methods: {
@@ -106,7 +115,7 @@ export default Vue.extend({
 
   // Colors and states
   background: $color-light;
-  border: 2px solid $color-dark-sub;
+  border: 2px solid $color-dark-lighter;
   outline: none !important;
   transition: 0.25s;
 

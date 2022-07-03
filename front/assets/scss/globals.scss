@@ -75,17 +75,31 @@
   flex-direction: column;
 }
 
+.ds-align {
+  &-stretch {
+    align-self: stretch;
+  }
+
+  &-start {
+    align-self: start;
+  }
+
+  &-end {
+    align-self: end;
+  }
+}
+
 .ds-flex {
   &-stretch {
     align-items: stretch;
   }
 
   &-start {
-    align-items: flex-start;
+    align-items: start;
   }
 
   &-end {
-    align-items: flex-end;
+    align-items: end;
   }
 
   &-row {

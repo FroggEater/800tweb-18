@@ -3,3 +3,9 @@ html {
   font-size: 16px;
   box-sizing: content-box;
 }
+
+.vc-container {
+  background: $color-light !important;
+  border: none !important;
+  font-family: "Barlow" !important;
+}

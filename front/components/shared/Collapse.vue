@@ -22,6 +22,8 @@ export default Vue.extend({
     right: Boolean,
     noscroll: Boolean,
     maximize: Boolean,
+    forceExpanded: Boolean,
+    freeWidth: Boolean,
   },
   data() {
     return {
@@ -30,7 +32,8 @@ export default Vue.extend({
   },
   computed: {
     computedClass: function () {
-      const { isExpanded, left, right, maximize } = this;
+      const { isExpanded, forceExpanded, left, right, maximize, freeWidth } =
+        this;
       const currClasses = ["ds-collapse"];
       const alignClass = left
         ? "ds-collapse-left"
@@ -42,7 +45,8 @@ export default Vue.extend({
         ...currClasses,
         alignClass,
         maximize && "ds-collapse--focus",
-        isExpanded && "ds-collapse--active",
+        freeWidth && "ds-collapse-free",
+        (isExpanded || forceExpanded) && "ds-collapse--active",
       ];
     },
   },
@@ -67,8 +71,15 @@ export default Vue.extend({
   }
 
   &--active {
-    width: 100%;
+    width: 16rem;
     transition: 0.25s;
+  }
+
+  &-free {
+    &.ds-collapse--active {
+      width: 100%;
+      transition: 0.25s;
+    }
   }
 
   // !important to override the prop-set height if <maximize> is dynamically

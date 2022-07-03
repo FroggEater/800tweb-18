@@ -26,7 +26,7 @@ export default {
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [{ src: "~/plugins/vcalendar.js", ssr: false }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -54,6 +54,7 @@ export default {
     strapi: {
       url: process.env.EPIC_ROAD_TRIP_EXTERNAL_API_URL,
     },
+    GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
     EPIC_ROAD_TRIP_EXTERNAL_API_URL:
       process.env.EPIC_ROAD_TRIP_EXTERNAL_API_URL,
   },
@@ -70,6 +71,7 @@ export default {
 
   env: {
     VUE_APP_API_URL: process.env.EPIC_ROAD_TRIP_EXTERNAL_API_URL,
+    VUE_APP_GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
   },
 
   googleFonts: {

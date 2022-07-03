@@ -43,6 +43,9 @@ module.exports = ({ env }) => ({
         },
         {
           model: 'hotels',
+          routes: [
+            { path: "/hotels-google", method: "POST" },
+          ],
           maxAge: 86400000,
           cacheTimeout: 60000,
         },
@@ -53,6 +56,30 @@ module.exports = ({ env }) => ({
         },
         {
           model: 'room-availabilities',
+          maxAge: 86400000,
+          cacheTimeout: 60000,
+        },
+        {
+          model: 'restaurants',
+          routes: [
+            { path: "/restaurants-google", method: "POST" },
+          ],
+          maxAge: 86400000,
+          cacheTimeout: 60000,
+        },
+        {
+          model: 'bars',
+          routes: [
+            { path: "/bars-google", method: "POST" },
+          ],
+          maxAge: 86400000,
+          cacheTimeout: 60000,
+        },
+        {
+          model: 'museums',
+          routes: [
+            { path: "/museums-google", method: "POST" },
+          ],
           maxAge: 86400000,
           cacheTimeout: 60000,
         },
