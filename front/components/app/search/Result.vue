@@ -1,10 +1,10 @@
 <template>
   <SharedWrapper stretch :class="computedClass" :width="width">
-    <iframe
+    <!-- <iframe
       v-if="computedIFrameURL && !isFlight"
       loading="lazy"
       :src="computedIFrameURL"
-    />
+    /> -->
     <div :class="computedContentClass">
       <div class="ds-flex-row-between ds-text-content">
         <div>{{ computedHeader }}</div>
@@ -33,6 +33,7 @@ export default Vue.extend({
     // Google
     name: { type: String, default: "" },
     address: { type: String, default: "" },
+    vicinity: { type: String, default: "" },
     rating: { type: Number, default: 0 },
     // Amadeus
     itineraries: { type: Array, default: () => [] },
@@ -75,7 +76,7 @@ export default Vue.extend({
       return isFlight ? `${from} to ${to}` : name;
     },
     computedSubInfo: function () {
-      const { itineraries = [], address, isFlight } = this;
+      const { itineraries = [], address, vicinity, isFlight } = this;
       const [itinerary = {}] = itineraries;
       const { segments = [] } = itinerary;
       const stops = Math.max(segments.length - 1, 0);
@@ -98,7 +99,7 @@ export default Vue.extend({
         )
         .join(":");
 
-      return isFlight ? `${flightTime} (${stops}X)` : address;
+      return isFlight ? `${flightTime} (${stops}X)` : address || vicinity;
     },
     computedExtraInfo: function () {
       const { rating, price, count, isFlight } = this;

@@ -79,7 +79,7 @@ export default Vue.extend({
     },
     computedSubInfo: function () {
       const { item, isFlight, raw } = this;
-      const { itineraries = [], address } = item;
+      const { itineraries = [], address, vicinity } = item;
       const [itinerary = {}] = itineraries;
       const { segments = [] } = itinerary;
       const stops = Math.max(segments.length - 1, 0);
@@ -107,7 +107,7 @@ export default Vue.extend({
           ? `${flightTime} with ${stops} stop(s)`
           : flightTime
         : raw
-        ? address
+        ? address || vicinity
         : "";
     },
     computedExtraInfo: function () {

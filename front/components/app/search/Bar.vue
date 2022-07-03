@@ -9,7 +9,6 @@
     />
 
     <SharedButton
-      v-show="isSearchingFlights"
       class="mr-3"
       icon="calendar"
       @click="() => (isDatePickerExpanded = !isDatePickerExpanded)"
