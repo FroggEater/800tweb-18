@@ -26,6 +26,14 @@
     },
     {
       "method": "POST",
+      "path": "/museums-google",
+      "handler": "museum.getGoogleMuseumsByCity",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
       "path": "/museums",
       "handler": "museum.create",
       "config": {
