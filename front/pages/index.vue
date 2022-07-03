@@ -1,7 +1,7 @@
 <template>
   <div class="ds-app-container ds-flex-row-between ds-flex-stretch">
     <div class="ds-app-nav">
-      <SideNav height="13.25rem" left @click="() => {}" />
+      <SideNav height="13.25rem" left @click="(id) => handleClick(id)" />
     </div>
     <AppSearch width="60rem" />
     <div class="ds-app-stepper">
@@ -13,6 +13,7 @@
 <script>
 import Vue from "vue";
 import VueFeather from "vue-feather";
+import { mapActions, mapState } from "vuex";
 import { MixinDB } from "@/mixins";
 
 Vue.component("feather", VueFeather);
@@ -22,7 +23,12 @@ export default Vue.extend({
   data() {
     return {
       isExpanded: false,
+      convertToPDF: () => {},
     };
+  },
+  mounted() {
+    this.loadSavedElements();
+    this.convertToPDF = require("html2pdf.js");
   },
   computed: {
     computedSearchBarClass: function () {
@@ -36,6 +42,14 @@ export default Vue.extend({
         isExpanded && "ds-app-search-container--active",
       ];
     },
+    ...mapState(["isDownloading"]),
+  },
+  methods: {
+    handleClick: function (id) {
+      if (id !== "download") return;
+      this.downloadTravel();
+    },
+    ...mapActions(["loadSavedElements", "downloadTravel"]),
   },
 });
 </script>

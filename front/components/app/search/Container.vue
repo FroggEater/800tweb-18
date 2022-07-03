@@ -43,15 +43,6 @@ export default Vue.extend({
       ];
     },
   },
-  watch: {
-    items: {
-      deep: true,
-      immediate: true,
-      handler: function (val) {
-        console.log("SearchContainer items", val);
-      },
-    },
-  },
 });
 </script>
 

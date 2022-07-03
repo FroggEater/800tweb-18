@@ -56,7 +56,6 @@ export default Vue.extend({
       const { type } = this;
 
       const results = await this.getSearchResults({ value, type });
-      console.log("loadResults", results);
       this.items = results;
     },
     handleSubmit: function (value) {
