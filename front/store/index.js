@@ -28,34 +28,15 @@ export const getters = {
 export const mutations = {
   addStepToTravel: function (state, step) {
     // Additional 1:1 parsing takes place here
-    const {
-      type,
-      period,
-      duration,
-      cost,
-      name,
-      startCity,
-      startCountry,
-      endCity,
-      endCountry,
-      count,
-    } = step;
+    const { type, item } = step;
+    const icon = state.types.find((t) => t.value === type).icon;
 
     state.travel = [
       ...state.travel,
       {
+        ...item,
         type,
-        period,
-        duration,
-        cost,
-        name,
-        startCity,
-        startCountry,
-        count,
-        ...(type === "flight" && {
-          ...(endCity && { endCity }),
-          ...(endCountry && { endCountry }),
-        }),
+        icon,
       },
     ];
   },

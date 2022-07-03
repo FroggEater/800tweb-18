@@ -16,7 +16,7 @@
 
 <script>
 import Vue from "vue";
-import {mapGetters} from "vuex";
+import { mapGetters } from "vuex";
 import { MixinDB } from "@/mixins";
 
 export default Vue.extend({

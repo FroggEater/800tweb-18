@@ -7,7 +7,11 @@
         :key="idx"
         @click.stop="() => $emit('click', idx)"
       >
-        <AppSearchResult v-bind="item" width="100%" :item="item" />
+        <AppSearchResult
+          v-bind="item"
+          width="100%"
+          :item="item"
+        />
       </div>
     </div>
     <div v-else :class="computedSubClass">No results, try another search.</div>
@@ -31,7 +35,12 @@ export default Vue.extend({
       const currClasses = ["ds-flex-col-start", "ds-flex-strech"];
       const textClasses = [!items.length && "ds-text-content"];
 
-      return [...currClasses, ...textClasses, "ds-search-results-list", !items.length && "ds-search-results-list--empty"];
+      return [
+        ...currClasses,
+        ...textClasses,
+        "ds-search-results-list",
+        !items.length && "ds-search-results-list--empty",
+      ];
     },
   },
   watch: {
