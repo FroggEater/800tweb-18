@@ -7,8 +7,10 @@ services:
       target: development
       args:
         EPIC_ROAD_TRIP_INTERNAL_API_URL: ${EPIC_ROAD_TRIP_INTERNAL_API_URL}
+        GOOGLE_API_KEY: ${GOOGLE_API_KEY}
     environment:
       EPIC_ROAD_TRIP_INTERNAL_API_URL: ${EPIC_ROAD_TRIP_INTERNAL_API_URL}
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY}
     volumes:
       - /usr/src/front/node_modules
       - ./front:/usr/src/front

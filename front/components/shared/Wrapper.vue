@@ -24,7 +24,7 @@ export default Vue.extend({
   computed: {
     computedClass: function () {
       const { column, noscroll, nowrap, stretch } = this;
-      const currClasses = ["ds-wrapper", "ds-flex-start"];
+      const currClasses = ["ds-wrapper", "ds-flex-stretch"];
       const flexClass = `ds-flex-${column ? "col" : "row"}-${
         stretch ? "between" : "start"
       }`;
