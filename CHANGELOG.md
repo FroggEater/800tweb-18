@@ -1,10 +1,12 @@
 # 📎 CHANGELOG
 
 ```
-v0.2.1 > v0.12.8
+v0.2.1 > v0.13.0
 ```
 
 ## 🚀 FEATURES
+
+#### **[PR#21](https://github.com/FroggEater/800tweb-18/pull/21) | ERT-66 | Add missing iFrames**
 
 #### **[PR#18](https://github.com/FroggEater/800tweb-18/pull/18) | ERT-64 | Fix remaining issues**
 
