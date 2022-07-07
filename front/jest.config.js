@@ -1,14 +1,22 @@
-const path = require('path')
-
 module.exports = {
-  testEnvironment: 'jest-environment-jsdom',
-  moduleDirectories: [
-    'node_modules',
-    path.join(__dirname, '.'),
-    'shared',
-    path.join(__dirname, 'test')
-  ],
+  // tell Jest to handle `*.vue` files
+  moduleFileExtensions: ["js", "json", "vue"],
+  watchman: false,
   moduleNameMapper: {
-    '\\.module\\.css$': 'identity-obj-proxy',
+    "^~/(.*)$": "<rootDir>/components/$1",
+    "^~~/(.*)$": "<rootDir>/components/$1",
+    "^@/(.*)$": "<rootDir>/components/$1"
   },
-}
+  transform: {
+    // process js with `babel-jest`
+    "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
+    // process `*.vue` files with `vue-jest`
+    ".*\\.(vue)$": "<rootDir>/node_modules/vue-jest"
+  },
+  snapshotSerializers: ["<rootDir>/node_modules/jest-serializer-vue"],
+  collectCoverage: true,
+  collectCoverageFrom: [
+    "<rootDir>/components/**/*.vue",
+    "<rootDir>/pages/*.vue"
+  ]
+};

@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
+require('jsdom-global')
 import { mount } from '@vue/test-utils'
 // lazy && needs to be fixed using absolute path
 import Counter from '../components/shared/Counter.vue'

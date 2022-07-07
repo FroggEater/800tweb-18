@@ -1,6 +1,5 @@
 import { shallowMount } from '@vue/test-utils'
-import NuxtLogo from '@/components/NuxtLogo.vue'
-require('jsdom-global')
+import NuxtLogo from '../../front/components/NuxtLogo.vue'
 
 describe('NuxtLogo', () => {
   test('is a Vue instance', () => {

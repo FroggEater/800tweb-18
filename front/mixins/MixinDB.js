@@ -1,7 +1,7 @@
 import Vue from "vue";
 import moment from "moment";
 
-import JSONCities from "@/static/cities.json";
+import JSONCities from "../static/cities.json";
 
 export default Vue.extend({
   methods: {

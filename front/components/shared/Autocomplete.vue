@@ -28,7 +28,7 @@
 
 <script>
 import Vue from "vue";
-import { MixinDB } from "@/mixins";
+import { MixinDB } from "../../mixins";
 
 export default Vue.extend({
   mixins: [MixinDB],

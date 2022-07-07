@@ -14,7 +14,7 @@
 import Vue from "vue";
 import VueFeather from "vue-feather";
 import { mapActions, mapState } from "vuex";
-import { MixinDB } from "@/mixins";
+import { MixinDB } from "../mixins";
 
 Vue.component("feather", VueFeather);
 
