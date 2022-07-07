@@ -1,10 +1,13 @@
 <template>
-  <SharedWrapper stretch :class="computedClass" :width="width">
-    <!-- <iframe
+  <SharedWrapper stretch nowrap :class="computedClass" :width="width">
+    <iframe
       v-if="computedIFrameURL && !isFlight"
+      class="ds-search-item-map"
       loading="lazy"
+      width="400"
+      height="250"
       :src="computedIFrameURL"
-    /> -->
+    />
     <div :class="computedContentClass">
       <div class="ds-flex-row-between ds-text-content">
         <div>{{ computedHeader }}</div>
@@ -136,8 +139,19 @@ export default Vue.extend({
 
 <style scoped lang="scss">
 .ds-search-item {
+  &-map {
+    border: none;
+    border-right: 2px solid $color-dark;
+    flex-basis: 50%;
+    flex-shrink: 0;
+    margin: -1rem;
+    margin-right: 1rem;
+  }
+
   &-content {
-    flex-grow: 1;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: 100%;
   }
 }
 </style>
